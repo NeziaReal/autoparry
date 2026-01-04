@@ -1,0 +1,2774 @@
+local combatAnimations = {
+	["rbxassetid://73909511758220"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://77200481731064"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://81343624564970"] = {
+		["Delay"] = 180,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://90222174246856"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://120591268956676"] = {
+		["Delay"] = 180,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://72026342966670"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://123559289828864"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://109153497237538"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://73200908069196"] = {
+		["Delay"] = 180,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 1,
+		["RepeatDelay"] = 200
+	},
+	["rbxassetid://140176432457093"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://77165655925697"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://136182618554502"] = {
+		["Delay"] = 180,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://129436447203162"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://123196114390104"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://120703912197833"] = {
+		["Delay"] = 180,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://111637306541526"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://79780873512551"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://91417655657970"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://124496925241237"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://97888761442444"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://130254051363204"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://110920960051584"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true
+	},
+	["rbxassetid://133676778221315"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://111882127396652"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 40,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://79981588130961"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://138044545828371"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://112387369480518"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://120459951639400"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://121050000257819"] = {
+		["Delay"] = 120,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://116301245600177"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://78213991536260"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://88929119667129"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true
+	},
+	["rbxassetid://124170657036313"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://82184472713821"] = {
+		["Delay"] = 2000,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 40,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true
+	},
+	["rbxassetid://96875568331308"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://103629114814061"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://122371661060085"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://136330405034599"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://84687276916489"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://124861357738478"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://113483328429065"] = {
+		["Delay"] = 390,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://96240580568749"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 1,
+		["RepeatDelay"] = 200
+	},
+	["rbxassetid://78297239425049"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://134047638406873"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://106306160427852"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://110738231926426"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://107500740429380"] = {
+		["Delay"] = 550,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://113373203557133"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://109285759428857"] = {
+		["Delay"] = 520,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://97485727762508"] = {
+		["Delay"] = 520,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://135835813606350"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://103561209301954"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://139400282938724"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://98357517858626"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://84286984142876"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://102453919149515"] = {
+		["Delay"] = 550,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://126923665753961"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://87070202310860"] = {
+		["Delay"] = 650,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://130405818992714"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://98283641519215"] = {
+		["Delay"] = 670,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://92937790229658"] = {
+		["Delay"] = 550,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://101521677894258"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://127566287157805"] = {
+		["Delay"] = 400,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://98960600377850"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://128625727833366"] = {
+		["Delay"] = 450,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://87764692704657"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://125123147660993"] = {
+		["Delay"] = 140,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://139753135160439"] = {
+		["Delay"] = 240,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://105184330766070"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://95223978004602"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://107868355016077"] = {
+		["Delay"] = 1840,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 40,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true
+	},
+	["rbxassetid://95150289594302"] = {
+		["Delay"] = 270,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://119570344423009"] = {
+		["Delay"] = 130,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://73760371893091"] = {
+		["Delay"] = 130,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://137309504999398"] = {
+		["Delay"] = 120,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://80560734051179"] = {
+		["Delay"] = 110,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://124747961486333"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://96651052503322"] = {
+		["Delay"] = 0,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://136225630152817"] = {
+		["Delay"] = 190,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://140472353306379"] = {
+		["Delay"] = 630,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true
+	},
+	["rbxassetid://126485913058460"] = {
+		["Delay"] = 450,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true,
+		["RepeatParryAmount"] = 5,
+		["RepeatParryDelay"] = 600
+	},
+	["rbxassetid://87277155207058"] = {
+		["Delay"] = 110,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://135309318514442"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://96389761265228"] = {
+		["Delay"] = 330,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://127462812873675"] = {
+		["Delay"] = 30,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://107752838734051"] = {
+		["Delay"] = 800,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 35,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true,
+		["RepeatParryAmount"] = 1,
+		["RepeatParryDelay"] = 1000
+	},
+	["rbxassetid://134903538230160"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["RepeatParryAmount"] = 1,
+		["RepeatParryDelay"] = 300
+	},
+	["rbxassetid://103430086615689"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://133200348314646"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://137072596301637"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://104346885061572"] = {
+		["Delay"] = 170,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://135552671823399"] = {
+		["Delay"] = 0,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://90460084897725"] = {
+		["Delay"] = 400,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["RepeatParryAmount"] = 1,
+		["RepeatParryDelay"] = 400
+	},
+	["rbxassetid://109184942183064"] = {
+		["Delay"] = 430,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://83022911727660"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://81458429848274"] = {
+		["Delay"] = 0,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://131051682278134"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://109123230222277"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://89588139226485"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://137684196851746"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://87735609876920"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://131385671108953"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 40,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://132546734612246"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true
+	},
+	["rbxassetid://98385414593823"] = {
+		["Delay"] = 170,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://102642995643169"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 40,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["RepeatParryAmount"] = 1,
+		["RepeatParryDelay"] = 400
+	},
+	["rbxassetid://125810707684008"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://124926828571060"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://119850347232500"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://91554414015826"] = {
+		["Delay"] = 400,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://103463736964630"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://95010299561530"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://98771209216846"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://134132208906469"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://110368664835385"] = {
+		["Delay"] = 230,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://114986752830080"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://131161290739036"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://106519942311504"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://139299396702735"] = {
+		["Delay"] = 230,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://126141375680416"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://122661360698160"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://135750505225960"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://123392788492194"] = {
+		["Delay"] = 230,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://104337999454796"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://77317789467088"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://107364098903611"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://110164563494809"] = {
+		["Delay"] = 230,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://125084555032360"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://97110277579383"] = {
+		["Delay"] = 230,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://106731070269238"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://75078726065204"] = {
+		["Delay"] = 450,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://130277667485774"] = {
+		["Delay"] = 0,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://115413666205678"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://129495651539604"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://101523256677778"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://128839194087258"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://76467866872093"] = {
+		["Delay"] = 180,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://78887381717473"] = {
+		["Delay"] = 410,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://130687440100798"] = {
+		["Delay"] = 240,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://110240097445732"] = {
+		["Delay"] = 170,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://118233181584094"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://78854925472750"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://125985327613003"] = {
+		["Delay"] = -50,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://83183690291105"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://139358065129445"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://128101625557631"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://137780787423425"] = {
+		["Delay"] = 330,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://134809434589356"] = {
+		["Delay"] = 450,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 35,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://105589945317363"] = {
+		["Delay"] = 860,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://115126886859402"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://116238600074144"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://77659049501128"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://82130174183873"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://134101600310736"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://125001482194702"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://130077418131222"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 45,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://78047711237192"] = {
+		["Delay"] = 400,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://76927396984144"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://124343869615532"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://94205575550862"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://124184099417502"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://102683625069547"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://132904283786634"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://76639298017828"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://91532107165998"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://134872805405567"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://129368863744217"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["RepeatParryAmount"] = 1,
+		["RepeatParryDelay"] = 400
+	},
+	["rbxassetid://110583793495632"] = {
+		["Delay"] = 50,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://106867803794428"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://100434572913975"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://134071135239015"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://90521401898889"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://108307424389592"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://130560592953206"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://99915059516084"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://101613783270135"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 1,
+		["RepeatDelay"] = 200
+	},
+	["rbxassetid://72678012629652"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://97870196303383"] = {
+		["Delay"] = 1150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 35,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://99762577752557"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://126074016457313"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://88694211921073"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://131297557817293"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://103255608932910"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://117434170736698"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://122675079330408"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://75362717367704"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://91066171406248"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 35,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://125273732099482"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://119065419146950"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://136761323860583"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://127813492491875"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://134741686910618"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://103983986351361"] = {
+		["Delay"] = 280,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://98178166706006"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://135205073126877"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://107287988363428"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://76272752426300"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://82068830027727"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://87492498431491"] = {
+		["Delay"] = 280,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://104802848622022"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://92214982692498"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://114579951667352"] = {
+		["Delay"] = 280,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://77780360064182"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://109500654652931"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://122049582999621"] = {
+		["Delay"] = 280,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://102372557046570"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://90597596100338"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://128106238874291"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://102546483231226"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://120830339429568"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://79913467941771"] = {
+		["Delay"] = 400,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true
+	},
+	["rbxassetid://99511332362280"] = {
+		["Delay"] = 730,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 45,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://118816187211996"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://122454882730691"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://102535173492586"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://86370715406171"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://94300503125812"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://100558480169185"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://131740708909971"] = {
+		["Delay"] = 400,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 36,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://108197299905495"] = {
+		["Delay"] = 220,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://114558724693893"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://72464788731730"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://74422320699083"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://98582715122328"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://105442988085026"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["RepeatParryAmount"] = 1,
+		["RepeatParryDelay"] = 400,
+		["Hold"] = true
+	},
+	["rbxassetid://80201031269662"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://111909089248577"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://99963342174936"] = {
+		["Delay"] = 190,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 2,
+		["RepeatDelay"] = 200
+	},
+	["rbxassetid://123123044774364"] = {
+		["Delay"] = 120,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://108458212372937"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://134488256445396"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://78797347094985"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://92415288342537"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://93902031289683"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://129441247864879"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://97138435604112"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://106461888875800"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://86232832931002"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://86086892466510"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://119912107937230"] = {
+		["Delay"] = 370,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://102288540818350"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://131696285162463"] = {
+		["Delay"] = 400,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://89816763320681"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true
+	},
+	["rbxassetid://101714150006632"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://93419864791125"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://120819611310918"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://88509112744612"] = {
+		["Delay"] = 760,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://136400690344027"] = {
+		["Delay"] = 0,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 20,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://121109139209671"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 1,
+		["RepeatDelay"] = 200
+	},
+	["rbxassetid://120354402053029"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://108012620140199"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://131074884814797"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://87004016130630"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://131725694254635"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://125049330153289"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://71491979500146"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://116706902543424"] = {
+		["Delay"] = 430,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://123728918222864"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://124766932801835"] = {
+		["Delay"] = 0,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true
+	},
+	["rbxassetid://87087952781021"] = {
+		["Delay"] = 550,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://90448243904946"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 45,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://106535138040115"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true
+	},
+	["rbxassetid://125415359989914"] = {
+		["Delay"] = 660,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://124819625937751"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true
+	},
+	["rbxassetid://76399640175696"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://138228123826571"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://114126220009836"] = {
+		["Delay"] = 210,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://115882469124985"] = {
+		["Delay"] = 210,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://120664443221590"] = {
+		["Delay"] = 210,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://108646132311038"] = {
+		["Delay"] = 210,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://105107078372382"] = {
+		["Delay"] = 350,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://113848079779223"] = {
+		["Delay"] = 140,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://70738136253672"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://94049296655188"] = {
+		["Delay"] = 1300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 35,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://138484499722859"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://115340718314209"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://129618429137267"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://114773679703806"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://86208887161745"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://125756826659861"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://102242322759462"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://118696475800411"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://135872625391687"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 40,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["Hold"] = true,
+		["RepeatParryAmount"] = 1,
+		["RepeatParryDelay"] = 300
+	},
+	["rbxassetid://124960892283230"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://74706986010083"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://126930390220804"] = {
+		["Delay"] = 200,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://134473609101433"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["RepeatParryAmount"] = 1,
+		["RepeatParryDelay"] = 400
+	},
+	["rbxassetid://127376055093534"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://75082454798619"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://75375865302458"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://123818970722547"] = {
+		["Delay"] = 300,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0,
+		["RepeatParryAmount"] = 1,
+		["RepeatParryDelay"] = 300
+	},
+	["rbxassetid://138545708561292"] = {
+		["Delay"] = 230,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://111230499786651"] = {
+		["Delay"] = 170,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://135652259836955"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://135900749451957"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://81633765878584"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://108984564775659"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://74877124260548"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://106257688932263"] = {
+		["Delay"] = 650,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://112467136433884"] = {
+		["Delay"] = 150,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://116952479079386"] = {
+		["Delay"] = 630,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 6,
+		["RepeatDelay"] = 200,
+		["Hold"] = true
+	},
+	["rbxassetid://99157378634706"] = {
+		["Delay"] = 180,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://136449717558100"] = {
+		["Delay"] = 140,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://135207502419237"] = {
+		["Delay"] = 400,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://120259747831957"] = {
+		["Delay"] = 1800,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 30,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://136641282446354"] = {
+		["Delay"] = 1200,
+		["Parryable"] = false,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://80342660237834"] = {
+		["Delay"] = 750,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://123704785794118"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = true,
+		["Range"] = 50,
+		["RepeatCount"] = 3,
+		["RepeatDelay"] = 300
+	},
+	["rbxassetid://73319481678482"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://107934946852201"] = {
+		["Delay"] = 550,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://135898238795346"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://120741003942852"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://73480352291165"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://139086739426590"] = {
+		["Delay"] = 750,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://128650604729435"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://82900331340803"] = {
+		["Delay"] = 700,
+		["Parryable"] = false,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://72662379371809"] = {
+		["Delay"] = 500,
+		["Parryable"] = false,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://76680580465447"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://72798299659280"] = {
+		["Delay"] = 700,
+		["Parryable"] = false,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://118924333638893"] = {
+		["Delay"] = 1000,
+		["Parryable"] = false,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://83691818071163"] = {
+		["Delay"] = 700,
+		["Parryable"] = false,
+		["MultiHit"] = true,
+		["Range"] = 50,
+		["RepeatCount"] = 2,
+		["RepeatDelay"] = 200
+	},
+	["rbxassetid://82528260253305"] = {
+		["Delay"] = 650,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://102445468244138"] = {
+		["Delay"] = 650,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://139919975605872"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://123543445163800"] = {
+		["Delay"] = 700,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://75292643761800"] = {
+		["Delay"] = 250,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 2,
+		["RepeatDelay"] = 100
+	},
+	["rbxassetid://83497963716622"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = true,
+		["Range"] = 50,
+		["RepeatCount"] = 10,
+		["RepeatDelay"] = 100
+	},
+	["rbxassetid://90569570699828"] = {
+		["Delay"] = 750,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://86176364287625"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://104648794624547"] = {
+		["Delay"] = 750,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://125608535553115"] = {
+		["Delay"] = 700,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://131653409763212"] = {
+		["Delay"] = 500,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://131442938695981"] = {
+		["Delay"] = 900,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://123727511642989"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://110619255719303"] = {
+		["Delay"] = 1000,
+		["Parryable"] = false,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://83748907427260"] = {
+		["Delay"] = 700,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 50,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://94946484791547"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 100,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://77368757687748"] = {
+		["Delay"] = 200,
+		["Parryable"] = false,
+		["MultiHit"] = false,
+		["Range"] = 100,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://104722560930205"] = {
+		["Delay"] = 600,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 100,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://101138797487568"] = {
+		["Delay"] = 650,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 100,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://108769432958516"] = {
+		["Delay"] = 550,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 100,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://85467164225058"] = {
+		["Delay"] = 700,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 100,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	},
+	["rbxassetid://121339998382547"] = {
+		["Delay"] = 730,
+		["Parryable"] = true,
+		["MultiHit"] = false,
+		["Range"] = 100,
+		["RepeatCount"] = 0,
+		["RepeatDelay"] = 0
+	}
+}
