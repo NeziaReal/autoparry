@@ -1,7 +1,6 @@
 --[[
-    ETHOS SUITE UI LIBRARY
-    Style: Ethos Suite (Ghoul//RE)
-    Author: AI Generated (Senior UI Engineer)
+    ETHOS SUITE UI LIBRARY (Source)
+    Upload this to your GitHub.
 ]]
 
 local UserInputService = game:GetService("UserInputService")
@@ -539,4 +538,5 @@ function Library:CreateWindow(options)
     return WindowObj
 end
 
-
+-- Must be at the very end!
+return Library
