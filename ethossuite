@@ -1,48 +1,73 @@
 --[[
-    ╔═══════════════════════════════════════════════════════════════╗
-    ║                    ETHOS SUITE UI LIBRARY                      ║
-    ║                     Pixel Perfect Recreation                   ║
-    ║                         Version 1.0.0                          ║
-    ╚═══════════════════════════════════════════════════════════════╝
+    ╔═══════════════════════════════════════════════════════════════════════════════╗
+    ║                                                                             ║
+    ║                         ███████╗████████╗██╗  ██╗ ██████╗ ███████╗          ║
+    ║                         ██╔════╝╚══██╔══╝██║  ██║██╔═══██╗██╔════╝          ║
+    ║                         █████╗     ██║   ███████║██║   ██║███████╗          ║
+    ║                         ██╔══╝     ██║   ██╔══██║██║   ██║╚════██║          ║
+    ║                         ███████╗   ██║   ██║  ██║╚██████╔╝███████║          ║
+    ║                         ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝          ║
+    ║                                                                             ║
+    ║                    ███████╗██╗   ██╗██╗████████╗███████╗                    ║
+    ║                    ██╔════╝██║   ██║██║╚══██╔══╝██╔════╝                    ║
+    ║                    ███████╗██║   ██║██║   ██║   █████╗                      ║
+    ║                    ╚════██║██║   ██║██║   ██║   ██╔══╝                      ║
+    ║                    ███████║╚██████╔╝██║   ██║   ███████╗                    ║
+    ║                    ╚══════╝ ╚═════╝ ╚═╝   ╚═╝   ╚══════╝                    ║
+    ║                                                                             ║
+    ║                         PIXEL PERFECT UI LIBRARY                            ║
+    ║                              VERSION 1.0.0                                  ║
+    ║                                                                             ║
+    ╚═══════════════════════════════════════════════════════════════════════════════╝
     
-    A pixel-perfect recreation of the Ethos Suite GUI
-    Easy to use, fully customizable, zero errors.
+    STANDALONE VERSION - Everything in one file
+    Copy and paste this entire script into your executor
+    
+    Features:
+    ✓ Pixel-perfect recreation of the Ethos Suite GUI
+    ✓ Smooth animations and transitions
+    ✓ Draggable window
+    ✓ Collapsible sidebar categories
+    ✓ Toggle switches with callbacks
+    ✓ Dropdown menus
+    ✓ Notification system
+    ✓ Zero dependencies
 --]]
 
-local EthosUI = {}
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- SERVICES
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
-local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 
--- ═══════════════════════════════════════════════════════════════
--- CONFIGURATION & CONSTANTS (Pixel Perfect Values)
--- ═══════════════════════════════════════════════════════════════
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- CONFIGURATION (EXACT VALUES FROM IMAGE ANALYSIS)
+-- ═══════════════════════════════════════════════════════════════════════════════
 
 local CONFIG = {
-    -- Window Dimensions
+    -- Window
     WINDOW_WIDTH = 580,
     WINDOW_HEIGHT = 380,
     SIDEBAR_WIDTH = 160,
     
-    -- Colors (Exact from image analysis)
+    -- Colors (Pixel Perfect)
     COLORS = {
-        SIDEBAR_BG = Color3.fromRGB(26, 30, 44),           -- Dark navy sidebar
-        SIDEBAR_BG_HOVER = Color3.fromRGB(35, 40, 58),     -- Hover state
-        MAIN_BG = Color3.fromRGB(15, 17, 24),              -- Main dark background
-        HEADER_BG = Color3.fromRGB(20, 23, 33),            -- Slightly lighter header
-        ACCENT_BLUE = Color3.fromRGB(59, 130, 246),        -- Toggle/checkbox blue
-        ACCENT_BLUE_HOVER = Color3.fromRGB(77, 145, 255),  -- Brighter blue
-        TEXT_PRIMARY = Color3.fromRGB(255, 255, 255),      -- White text
-        TEXT_SECONDARY = Color3.fromRGB(156, 163, 175),    -- Gray subtitle text
-        TEXT_MUTED = Color3.fromRGB(107, 114, 128),        -- Muted description text
-        BORDER = Color3.fromRGB(45, 50, 68),               -- Subtle borders
-        TOGGLE_BG = Color3.fromRGB(55, 65, 81),            -- Toggle background
-        TOGGLE_CHECK = Color3.fromRGB(59, 130, 246),       -- Toggle checkmark
-        DROPDOWN_BG = Color3.fromRGB(35, 39, 54),          -- Dropdown background
-        SECTION_HEADER = Color3.fromRGB(30, 33, 45),       -- Section header bg
+        SIDEBAR_BG = Color3.fromRGB(26, 30, 44),
+        SIDEBAR_BG_HOVER = Color3.fromRGB(35, 40, 58),
+        MAIN_BG = Color3.fromRGB(15, 17, 24),
+        ACCENT_BLUE = Color3.fromRGB(59, 130, 246),
+        ACCENT_BLUE_HOVER = Color3.fromRGB(77, 145, 255),
+        TEXT_PRIMARY = Color3.fromRGB(255, 255, 255),
+        TEXT_SECONDARY = Color3.fromRGB(156, 163, 175),
+        TEXT_MUTED = Color3.fromRGB(107, 114, 128),
+        BORDER = Color3.fromRGB(45, 50, 68),
+        TOGGLE_BG = Color3.fromRGB(55, 65, 81),
+        DROPDOWN_BG = Color3.fromRGB(35, 39, 54),
+        SECTION_HEADER = Color3.fromRGB(30, 33, 45),
     },
     
     -- Fonts
@@ -53,7 +78,7 @@ local CONFIG = {
         SMALL = Enum.Font.Gotham,
     },
     
-    -- Sizes
+    -- Text Sizes
     TEXT_SIZES = {
         TITLE = 14,
         SUBTITLE = 11,
@@ -62,21 +87,13 @@ local CONFIG = {
         DESCRIPTION = 9,
     },
     
-    -- Spacing
-    PADDING = {
-        SMALL = 4,
-        MEDIUM = 8,
-        LARGE = 12,
-        XLARGE = 16,
-    },
-    
     -- Animation
     TWEEN_INFO = TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 }
 
--- ═══════════════════════════════════════════════════════════════
+-- ═══════════════════════════════════════════════════════════════════════════════
 -- UTILITY FUNCTIONS
--- ═══════════════════════════════════════════════════════════════
+-- ═══════════════════════════════════════════════════════════════════════════════
 
 local function Create(className, properties)
     local instance = Instance.new(className)
@@ -89,800 +106,739 @@ local function Create(className, properties)
 end
 
 local function CreateCorner(parent, radius)
-    local corner = Create("UICorner", {
+    return Create("UICorner", {
         CornerRadius = UDim.new(0, radius or 4),
         Parent = parent,
     })
-    return corner
-end
-
-local function CreateStroke(parent, color, thickness)
-    local stroke = Create("UIStroke", {
-        Color = color or CONFIG.COLORS.BORDER,
-        Thickness = thickness or 1,
-        Parent = parent,
-    })
-    return stroke
 end
 
 local function CreatePadding(parent, padding)
-    local pad = Create("UIPadding", {
-        PaddingLeft = UDim.new(0, padding or CONFIG.PADDING.MEDIUM),
-        PaddingRight = UDim.new(0, padding or CONFIG.PADDING.MEDIUM),
-        PaddingTop = UDim.new(0, padding or CONFIG.PADDING.MEDIUM),
-        PaddingBottom = UDim.new(0, padding or CONFIG.PADDING.MEDIUM),
+    return Create("UIPadding", {
+        PaddingLeft = UDim.new(0, padding or 8),
+        PaddingRight = UDim.new(0, padding or 8),
+        PaddingTop = UDim.new(0, padding or 8),
+        PaddingBottom = UDim.new(0, padding or 8),
         Parent = parent,
     })
-    return pad
 end
 
-local function CreateListLayout(parent, padding, direction)
-    local layout = Create("UIListLayout", {
-        Padding = UDim.new(0, padding or CONFIG.PADDING.SMALL),
+local function CreateListLayout(parent, padding)
+    return Create("UIListLayout", {
+        Padding = UDim.new(0, padding or 4),
         SortOrder = Enum.SortOrder.LayoutOrder,
-        Direction = direction or Enum.FillDirection.Vertical,
         Parent = parent,
     })
-    return layout
 end
 
 local function Tween(instance, properties, duration)
-    local tweenInfo = TweenInfo.new(
-        duration or CONFIG.TWEEN_INFO.Time,
-        CONFIG.TWEEN_INFO.EasingStyle,
-        CONFIG.TWEEN_INFO.EasingDirection
-    )
+    local tweenInfo = TweenInfo.new(duration or 0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
     local tween = TweenService:Create(instance, tweenInfo, properties)
     tween:Play()
     return tween
 end
 
--- ═══════════════════════════════════════════════════════════════
--- ICONS (Using Roblox Emoji/Text as icons)
--- ═══════════════════════════════════════════════════════════════
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- ICONS
+-- ═══════════════════════════════════════════════════════════════════════════════
 
 local ICONS = {
     GEAR = "⚙",
     CHECK = "✓",
     DROPDOWN = "▼",
     DROPDOWN_RIGHT = "▶",
-    DOT = "•",
 }
 
--- ═══════════════════════════════════════════════════════════════
--- MAIN WINDOW CREATION
--- ═══════════════════════════════════════════════════════════════
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- MAIN GUI CREATION
+-- ═══════════════════════════════════════════════════════════════════════════════
 
-function EthosUI:CreateWindow(config)
-    config = config or {}
-    
-    local Window = {}
-    Window.Tabs = {}
-    Window.ActiveTab = nil
-    Window.Config = config
-    
-    -- ScreenGui
-    local ScreenGui = Create("ScreenGui", {
-        Name = config.Name or "EthosSuite",
-        Parent = config.Parent or LocalPlayer:WaitForChild("PlayerGui"),
-        ResetOnSpawn = false,
-        ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-    })
-    Window.ScreenGui = ScreenGui
-    
-    -- Main Frame (Draggable)
-    local MainFrame = Create("Frame", {
-        Name = "MainFrame",
-        Size = UDim2.new(0, config.Width or CONFIG.WINDOW_WIDTH, 0, config.Height or CONFIG.WINDOW_HEIGHT),
-        Position = UDim2.new(0.5, -(config.Width or CONFIG.WINDOW_WIDTH)/2, 0.5, -(config.Height or CONFIG.WINDOW_HEIGHT)/2),
-        BackgroundColor3 = CONFIG.COLORS.MAIN_BG,
-        BorderSizePixel = 0,
-        Parent = ScreenGui,
-    })
-    CreateCorner(MainFrame, 6)
-    Window.MainFrame = MainFrame
-    
-    -- Drop Shadow
-    local Shadow = Create("ImageLabel", {
-        Name = "Shadow",
-        Size = UDim2.new(1, 40, 1, 40),
-        Position = UDim2.new(0, -20, 0, -20),
-        BackgroundTransparency = 1,
-        Image = "rbxassetid://5554236805",
-        ImageColor3 = Color3.fromRGB(0, 0, 0),
-        ImageTransparency = 0.6,
-        ScaleType = Enum.ScaleType.Slice,
-        SliceCenter = Rect.new(23, 23, 277, 277),
-        ZIndex = -1,
-        Parent = MainFrame,
-    })
-    
-    -- ═══════════════════════════════════════════════════════════
-    -- SIDEBAR
-    -- ═══════════════════════════════════════════════════════════
-    
-    local Sidebar = Create("Frame", {
-        Name = "Sidebar",
-        Size = UDim2.new(0, CONFIG.SIDEBAR_WIDTH, 1, 0),
+local ScreenGui = Create("ScreenGui", {
+    Name = "EthosSuite",
+    Parent = LocalPlayer:WaitForChild("PlayerGui"),
+    ResetOnSpawn = false,
+    ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+})
+
+-- Main Frame
+local MainFrame = Create("Frame", {
+    Name = "MainFrame",
+    Size = UDim2.new(0, CONFIG.WINDOW_WIDTH, 0, CONFIG.WINDOW_HEIGHT),
+    Position = UDim2.new(0.5, -CONFIG.WINDOW_WIDTH/2, 0.5, -CONFIG.WINDOW_HEIGHT/2),
+    BackgroundColor3 = CONFIG.COLORS.MAIN_BG,
+    BorderSizePixel = 0,
+    Parent = ScreenGui,
+})
+CreateCorner(MainFrame, 6)
+
+-- Shadow
+local Shadow = Create("ImageLabel", {
+    Name = "Shadow",
+    Size = UDim2.new(1, 40, 1, 40),
+    Position = UDim2.new(0, -20, 0, -20),
+    BackgroundTransparency = 1,
+    Image = "rbxassetid://5554236805",
+    ImageColor3 = Color3.fromRGB(0, 0, 0),
+    ImageTransparency = 0.6,
+    ScaleType = Enum.ScaleType.Slice,
+    SliceCenter = Rect.new(23, 23, 277, 277),
+    ZIndex = -1,
+    Parent = MainFrame,
+})
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- SIDEBAR
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+local Sidebar = Create("Frame", {
+    Name = "Sidebar",
+    Size = UDim2.new(0, CONFIG.SIDEBAR_WIDTH, 1, 0),
+    BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG,
+    BorderSizePixel = 0,
+    Parent = MainFrame,
+})
+CreateCorner(Sidebar, 6)
+
+-- Sidebar Scroller
+local SidebarScroller = Create("ScrollingFrame", {
+    Name = "SidebarScroller",
+    Size = UDim2.new(1, 0, 1, -70),
+    Position = UDim2.new(0, 0, 0, 70),
+    BackgroundTransparency = 1,
+    BorderSizePixel = 0,
+    ScrollBarThickness = 2,
+    ScrollBarImageColor3 = CONFIG.COLORS.ACCENT_BLUE,
+    CanvasSize = UDim2.new(0, 0, 0, 0),
+    Parent = Sidebar,
+})
+
+local SidebarLayout = CreateListLayout(SidebarScroller, 2)
+CreatePadding(SidebarScroller, 8)
+
+-- Title Area
+local TitleArea = Create("Frame", {
+    Name = "TitleArea",
+    Size = UDim2.new(1, 0, 0, 70),
+    BackgroundTransparency = 1,
+    Parent = Sidebar,
+})
+CreatePadding(TitleArea, 12)
+
+-- Title Row
+local TitleRow = Create("Frame", {
+    Name = "TitleRow",
+    Size = UDim2.new(1, 0, 0, 18),
+    BackgroundTransparency = 1,
+    Parent = TitleArea,
+})
+
+local TitleLabel = Create("TextLabel", {
+    Name = "Title",
+    Size = UDim2.new(0, 0, 1, 0),
+    AutomaticSize = Enum.AutomaticSize.X,
+    BackgroundTransparency = 1,
+    Text = "ETHOS SUITE",
+    TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
+    TextSize = CONFIG.TEXT_SIZES.TITLE,
+    Font = CONFIG.FONTS.TITLE,
+    TextXAlignment = Enum.TextXAlignment.Left,
+    Parent = TitleRow,
+})
+
+-- Version Badge
+local VersionBadge = Create("Frame", {
+    Name = "VersionBadge",
+    Size = UDim2.new(0, 70, 0, 14),
+    Position = UDim2.new(0, 96, 0, 2),
+    BackgroundColor3 = CONFIG.COLORS.ACCENT_BLUE,
+    Parent = TitleRow,
+})
+CreateCorner(VersionBadge, 3)
+
+local VersionText = Create("TextLabel", {
+    Name = "VersionText",
+    Size = UDim2.new(1, 0, 1, 0),
+    BackgroundTransparency = 1,
+    Text = "GHOSTLINE",
+    TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
+    TextSize = 8,
+    Font = CONFIG.FONTS.SMALL,
+    Parent = VersionBadge,
+})
+
+-- Subtitle
+local SubtitleLabel = Create("TextLabel", {
+    Name = "Subtitle",
+    Size = UDim2.new(1, 0, 0, 12),
+    Position = UDim2.new(0, 0, 0, 22),
+    BackgroundTransparency = 1,
+    Text = "v0.0.0    0 executions",
+    TextColor3 = CONFIG.COLORS.TEXT_SECONDARY,
+    TextSize = CONFIG.TEXT_SIZES.SMALL,
+    Font = CONFIG.FONTS.SMALL,
+    TextXAlignment = Enum.TextXAlignment.Left,
+    Parent = TitleArea,
+})
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- CONTENT AREA
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+local ContentArea = Create("Frame", {
+    Name = "ContentArea",
+    Size = UDim2.new(1, -CONFIG.SIDEBAR_WIDTH - 1, 1, 0),
+    Position = UDim2.new(0, CONFIG.SIDEBAR_WIDTH + 1, 0, 0),
+    BackgroundColor3 = CONFIG.COLORS.MAIN_BG,
+    BorderSizePixel = 0,
+    Parent = MainFrame,
+})
+
+local ContentScroller = Create("ScrollingFrame", {
+    Name = "ContentScroller",
+    Size = UDim2.new(1, 0, 1, 0),
+    BackgroundTransparency = 1,
+    BorderSizePixel = 0,
+    ScrollBarThickness = 3,
+    ScrollBarImageColor3 = CONFIG.COLORS.ACCENT_BLUE,
+    CanvasSize = UDim2.new(0, 0, 0, 0),
+    Parent = ContentArea,
+})
+CreatePadding(ContentScroller, 16)
+
+local ContentLayout = CreateListLayout(ContentScroller, 16)
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- DRAG FUNCTIONALITY
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+local dragging = false
+local dragInput, dragStart, startPos
+
+TitleArea.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        MainFrame.Position = UDim2.new(
+            startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- HELPER FUNCTIONS FOR UI ELEMENTS
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+local function CreateSidebarCategory(name, hasChildren)
+    local CategoryButton = Create("TextButton", {
+        Name = name .. "Category",
+        Size = UDim2.new(1, 0, 0, 28),
         BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG,
         BorderSizePixel = 0,
-        Parent = MainFrame,
+        Text = "",
+        AutoButtonColor = false,
+        Parent = SidebarScroller,
     })
-    CreateCorner(Sidebar, 6)
     
-    -- Sidebar Content Container
-    local SidebarContent = Create("ScrollingFrame", {
-        Name = "SidebarContent",
-        Size = UDim2.new(1, 0, 1, -70),
-        Position = UDim2.new(0, 0, 0, 70),
+    Create("UIPadding", {
+        PaddingLeft = UDim.new(0, 12),
+        Parent = CategoryButton,
+    })
+    
+    local ArrowLabel = Create("TextLabel", {
+        Name = "Arrow",
+        Size = UDim.new(0, 10, 0, 10),
         BackgroundTransparency = 1,
-        BorderSizePixel = 0,
-        ScrollBarThickness = 2,
-        ScrollBarImageColor3 = CONFIG.COLORS.ACCENT_BLUE,
-        CanvasSize = UDim2.new(0, 0, 0, 0),
-        Parent = Sidebar,
-    })
-    
-    local SidebarLayout = CreateListLayout(SidebarContent, 2)
-    CreatePadding(SidebarContent, 8)
-    
-    -- Title Section
-    local TitleContainer = Create("Frame", {
-        Name = "TitleContainer",
-        Size = UDim2.new(1, 0, 0, 70),
-        BackgroundTransparency = 1,
-        Parent = Sidebar,
-    })
-    CreatePadding(TitleContainer, 12)
-    
-    local TitleLayout = CreateListLayout(TitleContainer, 2)
-    
-    -- Main Title
-    local TitleFrame = Create("Frame", {
-        Name = "TitleFrame",
-        Size = UDim2.new(1, 0, 0, 18),
-        BackgroundTransparency = 1,
-        Parent = TitleContainer,
-    })
-    
-    local TitleLabel = Create("TextLabel", {
-        Name = "Title",
-        Size = UDim2.new(0, 0, 1, 0),
-        AutomaticSize = Enum.AutomaticSize.X,
-        BackgroundTransparency = 1,
-        Text = config.Title or "ETHOS SUITE",
-        TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
-        TextSize = CONFIG.TEXT_SIZES.TITLE,
-        Font = CONFIG.FONTS.TITLE,
-        TextXAlignment = Enum.TextXAlignment.Left,
-        Parent = TitleFrame,
-    })
-    
-    -- Version Badge
-    local VersionBadge = Create("Frame", {
-        Name = "VersionBadge",
-        Size = UDim2.new(0, 70, 0, 14),
-        Position = UDim2.new(0, TitleLabel.AbsoluteSize.X + 6, 0, 2),
-        BackgroundColor3 = CONFIG.COLORS.ACCENT_BLUE,
-        Parent = TitleFrame,
-    })
-    CreateCorner(VersionBadge, 3)
-    
-    local VersionLabel = Create("TextLabel", {
-        Name = "Version",
-        Size = UDim2.new(1, 0, 1, 0),
-        BackgroundTransparency = 1,
-        Text = config.Version or "GHOSTLINE",
-        TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
+        Text = hasChildren and ICONS.DROPDOWN or "",
+        TextColor3 = CONFIG.COLORS.TEXT_SECONDARY,
         TextSize = 8,
         Font = CONFIG.FONTS.SMALL,
-        Parent = VersionBadge,
+        Parent = CategoryButton,
     })
     
-    -- Subtitle
-    local SubtitleLabel = Create("TextLabel", {
-        Name = "Subtitle",
-        Size = UDim2.new(1, 0, 0, 12),
+    local NameLabel = Create("TextLabel", {
+        Name = "Name",
+        Size = UDim2.new(1, -20, 1, 0),
+        Position = UDim2.new(0, 14, 0, 0),
         BackgroundTransparency = 1,
-        Text = config.Subtitle or "v0.0.0    0 executions",
-        TextColor3 = CONFIG.COLORS.TEXT_SECONDARY,
-        TextSize = CONFIG.TEXT_SIZES.SMALL,
-        Font = CONFIG.FONTS.SMALL,
+        Text = name,
+        TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
+        TextSize = CONFIG.TEXT_SIZES.REGULAR,
+        Font = CONFIG.FONTS.REGULAR,
         TextXAlignment = Enum.TextXAlignment.Left,
-        Parent = TitleContainer,
+        Parent = CategoryButton,
     })
     
-    -- ═══════════════════════════════════════════════════════════
-    -- CONTENT AREA
-    -- ═══════════════════════════════════════════════════════════
-    
-    local ContentArea = Create("Frame", {
-        Name = "ContentArea",
-        Size = UDim2.new(1, -CONFIG.SIDEBAR_WIDTH - 1, 1, 0),
-        Position = UDim2.new(0, CONFIG.SIDEBAR_WIDTH + 1, 0, 0),
-        BackgroundColor3 = CONFIG.COLORS.MAIN_BG,
-        BorderSizePixel = 0,
-        Parent = MainFrame,
-    })
-    
-    -- Content Scroller
-    local ContentScroller = Create("ScrollingFrame", {
-        Name = "ContentScroller",
-        Size = UDim2.new(1, 0, 1, 0),
-        BackgroundTransparency = 1,
-        BorderSizePixel = 0,
-        ScrollBarThickness = 3,
-        ScrollBarImageColor3 = CONFIG.COLORS.ACCENT_BLUE,
-        CanvasSize = UDim2.new(0, 0, 0, 0),
-        Parent = ContentArea,
-    })
-    CreatePadding(ContentScroller, 16)
-    
-    local ContentLayout = CreateListLayout(ContentScroller, 16)
-    
-    -- ═══════════════════════════════════════════════════════════
-    -- DRAG FUNCTIONALITY
-    -- ═══════════════════════════════════════════════════════════
-    
-    local dragging = false
-    local dragInput, dragStart, startPos
-    
-    TitleContainer.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = true
-            dragStart = input.Position
-            startPos = MainFrame.Position
-        end
+    -- Hover effect
+    CategoryButton.MouseEnter:Connect(function()
+        Tween(CategoryButton, {BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG_HOVER})
     end)
     
-    UserInputService.InputChanged:Connect(function(input)
-        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-            local delta = input.Position - dragStart
-            MainFrame.Position = UDim2.new(
-                startPos.X.Scale, startPos.X.Offset + delta.X,
-                startPos.Y.Scale, startPos.Y.Offset + delta.Y
-            )
-        end
+    CategoryButton.MouseLeave:Connect(function()
+        Tween(CategoryButton, {BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG})
     end)
     
-    UserInputService.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = false
-        end
-    end)
-    
-    -- ═══════════════════════════════════════════════════════════
-    -- TAB CREATION
-    -- ═══════════════════════════════════════════════════════════
-    
-    function Window:CreateTab(tabConfig)
-        tabConfig = tabConfig or {}
-        local Tab = {}
-        Tab.Sections = {}
-        Tab.Name = tabConfig.Name or "Tab"
-        Tab.Items = {}
-        
-        -- Sidebar Button
-        local TabButton = Create("TextButton", {
-            Name = tabConfig.Name .. "Button",
-            Size = UDim2.new(1, 0, 0, 28),
-            BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG,
-            BorderSizePixel = 0,
-            Text = "",
-            AutoButtonColor = false,
-            Parent = SidebarContent,
-        })
-        
-        local TabButtonPadding = Create("UIPadding", {
-            PaddingLeft = UDim.new(0, 12),
-            Parent = TabButton,
-        })
-        
-        local TabButtonLayout = Create("UIListLayout", {
-            FillDirection = Enum.FillDirection.Horizontal,
-            VerticalAlignment = Enum.VerticalAlignment.Center,
-            Padding = UDim.new(0, 6),
-            Parent = TabButton,
-        })
-        
-        -- Dropdown arrow if has children
-        local ArrowLabel = Create("TextLabel", {
-            Name = "Arrow",
-            Size = UDim2.new(0, 10, 0, 10),
-            BackgroundTransparency = 1,
-            Text = tabConfig.HasChildren and ICONS.DROPDOWN or "",
-            TextColor3 = CONFIG.COLORS.TEXT_SECONDARY,
-            TextSize = 8,
-            Font = CONFIG.FONTS.SMALL,
-            Parent = TabButton,
-        })
-        
-        local TabNameLabel = Create("TextLabel", {
-            Name = "Name",
-            Size = UDim2.new(1, -20, 1, 0),
-            BackgroundTransparency = 1,
-            Text = tabConfig.Name or "Tab",
-            TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
-            TextSize = CONFIG.TEXT_SIZES.REGULAR,
-            Font = CONFIG.FONTS.REGULAR,
-            TextXAlignment = Enum.TextXAlignment.Left,
-            Parent = TabButton,
-        })
-        
-        -- Hover effects
-        TabButton.MouseEnter:Connect(function()
-            Tween(TabButton, {BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG_HOVER})
-        end)
-        
-        TabButton.MouseLeave:Connect(function()
-            if Window.ActiveTab ~= Tab then
-                Tween(TabButton, {BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG})
-            end
-        end)
-        
-        -- Content Container (hidden by default)
-        local TabContent = Create("Frame", {
-            Name = tabConfig.Name .. "Content",
-            Size = UDim2.new(1, 0, 0, 0),
-            BackgroundTransparency = 1,
-            Visible = false,
-            Parent = ContentScroller,
-        })
-        
-        local TabContentLayout = CreateListLayout(TabContent, 16)
-        
-        -- Tab selection
-        TabButton.MouseButton1Click:Connect(function()
-            Window:SelectTab(Tab)
-        end)
-        
-        Tab.Button = TabButton
-        Tab.Content = TabContent
-        Tab.Arrow = ArrowLabel
-        Tab.Children = {}
-        Tab.Expanded = false
-        
-        table.insert(Window.Tabs, Tab)
-        
-        -- ═══════════════════════════════════════════════════════
-        -- SECTION CREATION
-        -- ═══════════════════════════════════════════════════════
-        
-        function Tab:CreateSection(sectionConfig)
-            sectionConfig = sectionConfig or {}
-            local Section = {}
-            
-            local SectionFrame = Create("Frame", {
-                Name = sectionConfig.Name or "Section",
-                Size = UDim2.new(1, 0, 0, 0),
-                AutomaticSize = Enum.AutomaticSize.Y,
-                BackgroundColor3 = CONFIG.COLORS.SECTION_HEADER,
-                BorderSizePixel = 0,
-                Parent = TabContent,
-            })
-            CreateCorner(SectionFrame, 4)
-            
-            local SectionPadding = CreatePadding(SectionFrame, 12)
-            local SectionLayout = CreateListLayout(SectionFrame, 8)
-            
-            -- Section Header
-            local HeaderFrame = Create("Frame", {
-                Name = "Header",
-                Size = UDim2.new(1, 0, 0, 20),
-                BackgroundTransparency = 1,
-                Parent = SectionFrame,
-            })
-            
-            local HeaderLayout = Create("UIListLayout", {
-                FillDirection = Enum.FillDirection.Horizontal,
-                VerticalAlignment = Enum.VerticalAlignment.Center,
-                Padding = UDim.new(0, 6),
-                Parent = HeaderFrame,
-            })
-            
-            local SectionTitle = Create("TextLabel", {
-                Name = "Title",
-                Size = UDim2.new(1, -20, 1, 0),
-                BackgroundTransparency = 1,
-                Text = sectionConfig.Name or "SECTION",
-                TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
-                TextSize = CONFIG.TEXT_SIZES.REGULAR,
-                Font = CONFIG.FONTS.SUBTITLE,
-                TextXAlignment = Enum.TextXAlignment.Left,
-                Parent = HeaderFrame,
-            })
-            
-            local GearIcon = Create("TextLabel", {
-                Name = "Gear",
-                Size = UDim2.new(0, 16, 0, 16),
-                BackgroundTransparency = 1,
-                Text = ICONS.GEAR,
-                TextColor3 = CONFIG.COLORS.TEXT_SECONDARY,
-                TextSize = 12,
-                Font = CONFIG.FONTS.REGULAR,
-                Parent = HeaderFrame,
-            })
-            
-            -- Items Container
-            local ItemsContainer = Create("Frame", {
-                Name = "Items",
-                Size = UDim2.new(1, 0, 0, 0),
-                AutomaticSize = Enum.AutomaticSize.Y,
-                BackgroundTransparency = 1,
-                Parent = SectionFrame,
-            })
-            
-            local ItemsLayout = CreateListLayout(ItemsContainer, 6)
-            
-            Section.Frame = SectionFrame
-            Section.ItemsContainer = ItemsContainer
-            
-            -- ═══════════════════════════════════════════════════
-            -- TOGGLE CREATION
-            -- ═══════════════════════════════════════════════════
-            
-            function Section:CreateToggle(toggleConfig)
-                toggleConfig = toggleConfig or {}
-                local Toggle = {}
-                Toggle.Value = toggleConfig.Default or false
-                Toggle.Callback = toggleConfig.Callback or function() end
-                
-                local ToggleFrame = Create("Frame", {
-                    Name = toggleConfig.Name or "Toggle",
-                    Size = UDim2.new(1, 0, 0, 45),
-                    BackgroundTransparency = 1,
-                    Parent = ItemsContainer,
-                })
-                
-                local ToggleLayout = Create("UIListLayout", {
-                    FillDirection = Enum.FillDirection.Horizontal,
-                    Parent = ToggleFrame,
-                })
-                
-                -- Text Container
-                local TextContainer = Create("Frame", {
-                    Name = "TextContainer",
-                    Size = UDim2.new(1, -40, 1, 0),
-                    BackgroundTransparency = 1,
-                    Parent = ToggleFrame,
-                })
-                
-                local TextLayout = CreateListLayout(TextContainer, 2)
-                
-                local ToggleName = Create("TextLabel", {
-                    Name = "Name",
-                    Size = UDim2.new(1, 0, 0, 16),
-                    BackgroundTransparency = 1,
-                    Text = toggleConfig.Name or "Toggle",
-                    TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
-                    TextSize = CONFIG.TEXT_SIZES.REGULAR,
-                    Font = CONFIG.FONTS.REGULAR,
-                    TextXAlignment = Enum.TextXAlignment.Left,
-                    Parent = TextContainer,
-                })
-                
-                local ToggleDesc = Create("TextLabel", {
-                    Name = "Description",
-                    Size = UDim2.new(1, 0, 0, 0),
-                    AutomaticSize = Enum.AutomaticSize.Y,
-                    BackgroundTransparency = 1,
-                    Text = toggleConfig.Description or "",
-                    TextColor3 = CONFIG.COLORS.TEXT_MUTED,
-                    TextSize = CONFIG.TEXT_SIZES.DESCRIPTION,
-                    Font = CONFIG.FONTS.SMALL,
-                    TextXAlignment = Enum.TextXAlignment.Left,
-                    TextWrapped = true,
-                    Parent = TextContainer,
-                })
-                
-                -- Toggle Button
-                local ToggleButton = Create("TextButton", {
-                    Name = "ToggleButton",
-                    Size = UDim2.new(0, 20, 0, 20),
-                    Position = UDim2.new(1, -24, 0.5, -10),
-                    BackgroundColor3 = Toggle.Value and CONFIG.COLORS.ACCENT_BLUE or CONFIG.COLORS.TOGGLE_BG,
-                    BorderSizePixel = 0,
-                    Text = Toggle.Value and ICONS.CHECK or "",
-                    TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
-                    TextSize = 12,
-                    Font = CONFIG.FONTS.SUBTITLE,
-                    Parent = ToggleFrame,
-                })
-                CreateCorner(ToggleButton, 4)
-                
-                -- Toggle functionality
-                local function UpdateToggle()
-                    Toggle.Value = not Toggle.Value
-                    Tween(ToggleButton, {
-                        BackgroundColor3 = Toggle.Value and CONFIG.COLORS.ACCENT_BLUE or CONFIG.COLORS.TOGGLE_BG
-                    })
-                    ToggleButton.Text = Toggle.Value and ICONS.CHECK or ""
-                    if Toggle.Callback then
-                        Toggle.Callback(Toggle.Value)
-                    end
-                end
-                
-                ToggleButton.MouseButton1Click:Connect(UpdateToggle)
-                ToggleFrame.InputBegan:Connect(function(input)
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                        UpdateToggle()
-                    end
-                end)
-                
-                Toggle.Frame = ToggleFrame
-                Toggle.Button = ToggleButton
-                
-                return Toggle
-            end
-            
-            -- ═══════════════════════════════════════════════════
-            -- DROPDOWN CREATION
-            -- ═══════════════════════════════════════════════════
-            
-            function Section:CreateDropdown(dropdownConfig)
-                dropdownConfig = dropdownConfig or {}
-                local Dropdown = {}
-                Dropdown.Options = dropdownConfig.Options or {}
-                Dropdown.Selected = dropdownConfig.Default or "..."
-                Dropdown.Callback = dropdownConfig.Callback or function() end
-                
-                local DropdownFrame = Create("Frame", {
-                    Name = dropdownConfig.Name or "Dropdown",
-                    Size = UDim2.new(1, 0, 0, 45),
-                    BackgroundTransparency = 1,
-                    Parent = ItemsContainer,
-                })
-                
-                local DropdownLayout = Create("UIListLayout", {
-                    FillDirection = Enum.FillDirection.Horizontal,
-                    Parent = DropdownFrame,
-                })
-                
-                -- Text Container
-                local TextContainer = Create("Frame", {
-                    Name = "TextContainer",
-                    Size = UDim2.new(1, -70, 1, 0),
-                    BackgroundTransparency = 1,
-                    Parent = DropdownFrame,
-                })
-                
-                local TextLayout = CreateListLayout(TextContainer, 2)
-                
-                local DropdownName = Create("TextLabel", {
-                    Name = "Name",
-                    Size = UDim2.new(1, 0, 0, 16),
-                    BackgroundTransparency = 1,
-                    Text = dropdownConfig.Name or "Dropdown",
-                    TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
-                    TextSize = CONFIG.TEXT_SIZES.REGULAR,
-                    Font = CONFIG.FONTS.REGULAR,
-                    TextXAlignment = Enum.TextXAlignment.Left,
-                    Parent = TextContainer,
-                })
-                
-                local DropdownDesc = Create("TextLabel", {
-                    Name = "Description",
-                    Size = UDim2.new(1, 0, 0, 0),
-                    AutomaticSize = Enum.AutomaticSize.Y,
-                    BackgroundTransparency = 1,
-                    Text = dropdownConfig.Description or "",
-                    TextColor3 = CONFIG.COLORS.TEXT_MUTED,
-                    TextSize = CONFIG.TEXT_SIZES.DESCRIPTION,
-                    Font = CONFIG.FONTS.SMALL,
-                    TextXAlignment = Enum.TextXAlignment.Left,
-                    TextWrapped = true,
-                    Parent = TextContainer,
-                })
-                
-                -- Dropdown Button
-                local DropdownButton = Create("TextButton", {
-                    Name = "DropdownButton",
-                    Size = UDim2.new(0, 50, 0, 20),
-                    Position = UDim2.new(1, -54, 0.5, -10),
-                    BackgroundColor3 = CONFIG.COLORS.DROPDOWN_BG,
-                    BorderSizePixel = 0,
-                    Text = Dropdown.Selected,
-                    TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
-                    TextSize = 10,
-                    Font = CONFIG.FONTS.SMALL,
-                    Parent = DropdownFrame,
-                })
-                CreateCorner(DropdownButton, 4)
-                
-                Dropdown.Frame = DropdownFrame
-                Dropdown.Button = DropdownButton
-                
-                return Dropdown
-            end
-            
-            table.insert(Tab.Sections, Section)
-            
-            return Section
-        end
-        
-        -- ═══════════════════════════════════════════════════════
-        -- SUB-ITEM CREATION (For sidebar children)
-        -- ═══════════════════════════════════════════════════════
-        
-        function Tab:AddChild(childConfig)
-            childConfig = childConfig or {}
-            
-            local ChildButton = Create("TextButton", {
-                Name = childConfig.Name .. "Child",
-                Size = UDim2.new(1, -16, 0, 24),
-                BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG,
-                BorderSizePixel = 0,
-                Text = "",
-                AutoButtonColor = false,
-                Parent = SidebarContent,
-            })
-            
-            local ChildPadding = Create("UIPadding", {
-                PaddingLeft = UDim.new(0, 28),
-                Parent = ChildButton,
-            })
-            
-            local ChildLabel = Create("TextLabel", {
-                Name = "Name",
-                Size = UDim2.new(1, 0, 1, 0),
-                BackgroundTransparency = 1,
-                Text = childConfig.Name or "Item",
-                TextColor3 = CONFIG.COLORS.TEXT_SECONDARY,
-                TextSize = CONFIG.TEXT_SIZES.REGULAR,
-                Font = CONFIG.FONTS.REGULAR,
-                TextXAlignment = Enum.TextXAlignment.Left,
-                Parent = ChildButton,
-            })
-            
-            ChildButton.MouseEnter:Connect(function()
-                Tween(ChildButton, {BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG_HOVER})
-            end)
-            
-            ChildButton.MouseLeave:Connect(function()
-                Tween(ChildButton, {BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG})
-            end)
-            
-            table.insert(Tab.Children, ChildButton)
-            
-            return ChildButton
-        end
-        
-        -- Expand/Collapse functionality
-        function Tab:ToggleExpand()
-            Tab.Expanded = not Tab.Expanded
-            ArrowLabel.Text = Tab.Expanded and ICONS.DROPDOWN or ICONS.DROPDOWN_RIGHT
-            
-            for _, child in ipairs(Tab.Children) do
-                child.Visible = Tab.Expanded
-            end
-            
-            -- Recalculate canvas size
-            task.wait(0.1)
-            SidebarContent.CanvasSize = UDim2.new(0, 0, 0, SidebarLayout.AbsoluteContentSize.Y + 20)
-        end
-        
-        if tabConfig.HasChildren then
-            ArrowLabel.Text = ICONS.DROPDOWN_RIGHT
-            TabButton.MouseButton1Click:Connect(function()
-                Tab:ToggleExpand()
-            end)
-        end
-        
-        return Tab
-    end
-    
-    -- ═══════════════════════════════════════════════════════════
-    -- TAB SELECTION
-    -- ═══════════════════════════════════════════════════════════
-    
-    function Window:SelectTab(tab)
-        if Window.ActiveTab == tab then return end
-        
-        -- Hide previous tab
-        if Window.ActiveTab then
-            Window.ActiveTab.Content.Visible = false
-            Tween(Window.ActiveTab.Button, {BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG})
-        end
-        
-        -- Show new tab
-        Window.ActiveTab = tab
-        tab.Content.Visible = true
-        Tween(tab.Button, {BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG_HOVER})
-        
-        -- Update canvas size
-        task.wait(0.05)
-        ContentScroller.CanvasSize = UDim2.new(0, 0, 0, ContentLayout.AbsoluteContentSize.Y + 32)
-    end
-    
-    -- ═══════════════════════════════════════════════════════════
-    -- WINDOW CONTROLS
-    -- ═══════════════════════════════════════════════════════════
-    
-    function Window:Show()
-        MainFrame.Visible = true
-        Tween(MainFrame, {Size = UDim2.new(0, CONFIG.WINDOW_WIDTH, 0, CONFIG.WINDOW_HEIGHT)}, 0.2)
-    end
-    
-    function Window:Hide()
-        Tween(MainFrame, {Size = UDim2.new(0, 0, 0, 0)}, 0.2).Completed:Wait()
-        MainFrame.Visible = false
-    end
-    
-    function Window:Destroy()
-        ScreenGui:Destroy()
-    end
-    
-    -- Initial canvas size update
-    task.delay(0.1, function()
-        SidebarContent.CanvasSize = UDim2.new(0, 0, 0, SidebarLayout.AbsoluteContentSize.Y + 20)
-    end)
-    
-    return Window
+    return CategoryButton, ArrowLabel
 end
 
--- ═══════════════════════════════════════════════════════════════
--- NOTIFICATION SYSTEM
--- ═══════════════════════════════════════════════════════════════
-
-function EthosUI:Notify(config)
-    config = config or {}
-    
-    local NotificationGui = Create("ScreenGui", {
-        Name = "EthosNotification",
-        Parent = LocalPlayer:WaitForChild("PlayerGui"),
-        ResetOnSpawn = false,
-    })
-    
-    local NotificationFrame = Create("Frame", {
-        Name = "Notification",
-        Size = UDim2.new(0, 280, 0, 60),
-        Position = UDim2.new(1, -300, 1, -80),
+local function CreateSidebarChild(name)
+    local ChildButton = Create("TextButton", {
+        Name = name .. "Child",
+        Size = UDim2.new(1, -16, 0, 24),
         BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG,
         BorderSizePixel = 0,
-        Parent = NotificationGui,
+        Text = "",
+        AutoButtonColor = false,
+        Visible = false,
+        Parent = SidebarScroller,
     })
-    CreateCorner(NotificationFrame, 6)
     
-    local Title = Create("TextLabel", {
-        Name = "Title",
-        Size = UDim2.new(1, -20, 0, 20),
-        Position = UDim2.new(0, 12, 0, 8),
+    Create("UIPadding", {
+        PaddingLeft = UDim.new(0, 28),
+        Parent = ChildButton,
+    })
+    
+    Create("TextLabel", {
+        Name = "Name",
+        Size = UDim2.new(1, 0, 1, 0),
         BackgroundTransparency = 1,
-        Text = config.Title or "Notification",
+        Text = name,
+        TextColor3 = CONFIG.COLORS.TEXT_SECONDARY,
+        TextSize = CONFIG.TEXT_SIZES.REGULAR,
+        Font = CONFIG.FONTS.REGULAR,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = ChildButton,
+    })
+    
+    ChildButton.MouseEnter:Connect(function()
+        Tween(ChildButton, {BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG_HOVER})
+    end)
+    
+    ChildButton.MouseLeave:Connect(function()
+        Tween(ChildButton, {BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG})
+    end)
+    
+    return ChildButton
+end
+
+local function CreateSection(name)
+    local SectionFrame = Create("Frame", {
+        Name = name .. "Section",
+        Size = UDim2.new(1, 0, 0, 0),
+        AutomaticSize = Enum.AutomaticSize.Y,
+        BackgroundColor3 = CONFIG.COLORS.SECTION_HEADER,
+        BorderSizePixel = 0,
+        Parent = ContentScroller,
+    })
+    CreateCorner(SectionFrame, 4)
+    CreatePadding(SectionFrame, 12)
+    
+    local SectionLayout = CreateListLayout(SectionFrame, 8)
+    
+    -- Header
+    local HeaderFrame = Create("Frame", {
+        Name = "Header",
+        Size = UDim2.new(1, 0, 0, 20),
+        BackgroundTransparency = 1,
+        Parent = SectionFrame,
+    })
+    
+    Create("TextLabel", {
+        Name = "Title",
+        Size = UDim2.new(1, -20, 1, 0),
+        BackgroundTransparency = 1,
+        Text = name,
         TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
         TextSize = CONFIG.TEXT_SIZES.REGULAR,
         Font = CONFIG.FONTS.SUBTITLE,
         TextXAlignment = Enum.TextXAlignment.Left,
-        Parent = NotificationFrame,
+        Parent = HeaderFrame,
     })
     
-    local Message = Create("TextLabel", {
+    Create("TextLabel", {
+        Name = "Gear",
+        Size = UDim2.new(0, 16, 0, 16),
+        Position = UDim2.new(1, -16, 0, 2),
+        BackgroundTransparency = 1,
+        Text = ICONS.GEAR,
+        TextColor3 = CONFIG.COLORS.TEXT_SECONDARY,
+        TextSize = 12,
+        Font = CONFIG.FONTS.REGULAR,
+        Parent = HeaderFrame,
+    })
+    
+    local ItemsContainer = Create("Frame", {
+        Name = "Items",
+        Size = UDim2.new(1, 0, 0, 0),
+        AutomaticSize = Enum.AutomaticSize.Y,
+        BackgroundTransparency = 1,
+        Parent = SectionFrame,
+    })
+    
+    CreateListLayout(ItemsContainer, 6)
+    
+    return ItemsContainer
+end
+
+local function CreateToggle(parent, name, description, default, callback)
+    callback = callback or function() end
+    local value = default or false
+    
+    local ToggleFrame = Create("Frame", {
+        Name = name .. "Toggle",
+        Size = UDim2.new(1, 0, 0, description and 45 or 28),
+        BackgroundTransparency = 1,
+        Parent = parent,
+    })
+    
+    -- Text Container
+    local TextContainer = Create("Frame", {
+        Name = "TextContainer",
+        Size = UDim2.new(1, -40, 1, 0),
+        BackgroundTransparency = 1,
+        Parent = ToggleFrame,
+    })
+    
+    Create("TextLabel", {
+        Name = "Name",
+        Size = UDim2.new(1, 0, 0, 16),
+        BackgroundTransparency = 1,
+        Text = name,
+        TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
+        TextSize = CONFIG.TEXT_SIZES.REGULAR,
+        Font = CONFIG.FONTS.REGULAR,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = TextContainer,
+    })
+    
+    if description then
+        Create("TextLabel", {
+            Name = "Description",
+            Size = UDim2.new(1, 0, 0, 0),
+            AutomaticSize = Enum.AutomaticSize.Y,
+            Position = UDim2.new(0, 0, 0, 18),
+            BackgroundTransparency = 1,
+            Text = description,
+            TextColor3 = CONFIG.COLORS.TEXT_MUTED,
+            TextSize = CONFIG.TEXT_SIZES.DESCRIPTION,
+            Font = CONFIG.FONTS.SMALL,
+            TextXAlignment = Enum.TextXAlignment.Left,
+            TextWrapped = true,
+            Parent = TextContainer,
+        })
+    end
+    
+    -- Toggle Button
+    local ToggleButton = Create("TextButton", {
+        Name = "ToggleButton",
+        Size = UDim2.new(0, 20, 0, 20),
+        Position = UDim2.new(1, -24, 0.5, -10),
+        BackgroundColor3 = value and CONFIG.COLORS.ACCENT_BLUE or CONFIG.COLORS.TOGGLE_BG,
+        BorderSizePixel = 0,
+        Text = value and ICONS.CHECK or "",
+        TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
+        TextSize = 12,
+        Font = CONFIG.FONTS.SUBTITLE,
+        Parent = ToggleFrame,
+    })
+    CreateCorner(ToggleButton, 4)
+    
+    local function UpdateToggle()
+        value = not value
+        Tween(ToggleButton, {
+            BackgroundColor3 = value and CONFIG.COLORS.ACCENT_BLUE or CONFIG.COLORS.TOGGLE_BG
+        })
+        ToggleButton.Text = value and ICONS.CHECK or ""
+        callback(value)
+    end
+    
+    ToggleButton.MouseButton1Click:Connect(UpdateToggle)
+    
+    return ToggleFrame, function() return value end
+end
+
+local function CreateDropdown(parent, name, description, default)
+    local DropdownFrame = Create("Frame", {
+        Name = name .. "Dropdown",
+        Size = UDim2.new(1, 0, 0, description and 45 or 28),
+        BackgroundTransparency = 1,
+        Parent = parent,
+    })
+    
+    -- Text Container
+    local TextContainer = Create("Frame", {
+        Name = "TextContainer",
+        Size = UDim2.new(1, -70, 1, 0),
+        BackgroundTransparency = 1,
+        Parent = DropdownFrame,
+    })
+    
+    Create("TextLabel", {
+        Name = "Name",
+        Size = UDim2.new(1, 0, 0, 16),
+        BackgroundTransparency = 1,
+        Text = name,
+        TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
+        TextSize = CONFIG.TEXT_SIZES.REGULAR,
+        Font = CONFIG.FONTS.REGULAR,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = TextContainer,
+    })
+    
+    if description then
+        Create("TextLabel", {
+            Name = "Description",
+            Size = UDim2.new(1, 0, 0, 0),
+            AutomaticSize = Enum.AutomaticSize.Y,
+            Position = UDim2.new(0, 0, 0, 18),
+            BackgroundTransparency = 1,
+            Text = description,
+            TextColor3 = CONFIG.COLORS.TEXT_MUTED,
+            TextSize = CONFIG.TEXT_SIZES.DESCRIPTION,
+            Font = CONFIG.FONTS.SMALL,
+            TextXAlignment = Enum.TextXAlignment.Left,
+            TextWrapped = true,
+            Parent = TextContainer,
+        })
+    end
+    
+    -- Dropdown Button
+    local DropdownButton = Create("TextButton", {
+        Name = "DropdownButton",
+        Size = UDim2.new(0, 50, 0, 20),
+        Position = UDim2.new(1, -54, 0.5, -10),
+        BackgroundColor3 = CONFIG.COLORS.DROPDOWN_BG,
+        BorderSizePixel = 0,
+        Text = default or "...",
+        TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
+        TextSize = 10,
+        Font = CONFIG.FONTS.SMALL,
+        Parent = DropdownFrame,
+    })
+    CreateCorner(DropdownButton, 4)
+    
+    return DropdownFrame
+end
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- CREATE SIDEBAR ITEMS (EXACT FROM IMAGE)
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+-- COMBAT Category
+local CombatCategory, CombatArrow = CreateSidebarCategory("COMBAT", true)
+local CombatChildren = {}
+table.insert(CombatChildren, CreateSidebarChild("General Combat"))
+table.insert(CombatChildren, CreateSidebarChild("Auto Parry"))
+table.insert(CombatChildren, CreateSidebarChild("Auto Parry"))
+table.insert(CombatChildren, CreateSidebarChild("Attach to Back"))
+
+local combatExpanded = false
+CombatCategory.MouseButton1Click:Connect(function()
+    combatExpanded = not combatExpanded
+    CombatArrow.Text = combatExpanded and ICONS.DROPDOWN or ICONS.DROPDOWN_RIGHT
+    for _, child in ipairs(CombatChildren) do
+        child.Visible = combatExpanded
+    end
+    task.wait(0.1)
+    SidebarScroller.CanvasSize = UDim2.new(0, 0, 0, SidebarLayout.AbsoluteContentSize.Y + 20)
+end)
+
+-- AUTOMATION Category 1
+local AutoCategory1, AutoArrow1 = CreateSidebarCategory("AUTOMATION", true)
+local AutoChildren1 = {}
+table.insert(AutoChildren1, CreateSidebarChild("General Automation"))
+table.insert(AutoChildren1, CreateSidebarChild("Mission Farm"))
+table.insert(AutoChildren1, CreateSidebarChild("Boss Farm"))
+table.insert(AutoChildren1, CreateSidebarChild("Event Farm"))
+table.insert(AutoChildren1, CreateSidebarChild("Loot Farm"))
+table.insert(AutoChildren1, CreateSidebarChild("Reputation Farm"))
+
+local autoExpanded1 = false
+AutoCategory1.MouseButton1Click:Connect(function()
+    autoExpanded1 = not autoExpanded1
+    AutoArrow1.Text = autoExpanded1 and ICONS.DROPDOWN or ICONS.DROPDOWN_RIGHT
+    for _, child in ipairs(AutoChildren1) do
+        child.Visible = autoExpanded1
+    end
+    task.wait(0.1)
+    SidebarScroller.CanvasSize = UDim2.new(0, 0, 0, SidebarLayout.AbsoluteContentSize.Y + 20)
+end)
+
+-- AUTOMATION Category 2 (Server Management)
+local AutoCategory2, AutoArrow2 = CreateSidebarCategory("AUTOMATION", true)
+local AutoChildren2 = {}
+table.insert(AutoChildren2, CreateSidebarChild("Server Management"))
+
+local autoExpanded2 = false
+AutoCategory2.MouseButton1Click:Connect(function()
+    autoExpanded2 = not autoExpanded2
+    AutoArrow2.Text = autoExpanded2 and ICONS.DROPDOWN or ICONS.DROPDOWN_RIGHT
+    for _, child in ipairs(AutoChildren2) do
+        child.Visible = autoExpanded2
+    end
+    task.wait(0.1)
+    SidebarScroller.CanvasSize = UDim2.new(0, 0, 0, SidebarLayout.AbsoluteContentSize.Y + 20)
+end)
+
+-- UTILITY Category
+local UtilityCategory, UtilityArrow = CreateSidebarCategory("UTILITY", true)
+local UtilityChildren = {}
+table.insert(UtilityChildren, CreateSidebarChild("Inventory"))
+
+local utilityExpanded = false
+UtilityCategory.MouseButton1Click:Connect(function()
+    utilityExpanded = not utilityExpanded
+    UtilityArrow.Text = utilityExpanded and ICONS.DROPDOWN or ICONS.DROPDOWN_RIGHT
+    for _, child in ipairs(UtilityChildren) do
+        child.Visible = utilityExpanded
+    end
+    task.wait(0.1)
+    SidebarScroller.CanvasSize = UDim2.new(0, 0, 0, SidebarLayout.AbsoluteContentSize.Y + 20)
+end)
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- CREATE CONTENT SECTIONS (EXACT FROM IMAGE)
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+-- MAIN SETTINGS Section
+local MainSettingsContainer = CreateSection("MAIN SETTINGS")
+
+CreateToggle(MainSettingsContainer, "Auto Parry", "Enable toggles the auto parry system.", true, function(v)
+    print("Auto Parry:", v)
+end)
+
+CreateToggle(MainSettingsContainer, "Auto Parry Notify", "Notifies you when auto parry is on or off.", true, function(v)
+    print("Auto Parry Notify:", v)
+end)
+
+CreateToggle(MainSettingsContainer, "Validation Retry", "Reattempts parry validation if it fails required conditions within parry window.", true, function(v)
+    print("Validation Retry:", v)
+end)
+
+CreateToggle(MainSettingsContainer, "Block M1 During Parry Delay", "Blocks mouse button 1 attack event while waiting to execute an auto parry.", true, function(v)
+    print("Block M1:", v)
+end)
+
+CreateDropdown(MainSettingsContainer, "Race Blacklist", "Don't auto parry attacks from players of the selected race(s).", "...")
+
+CreateToggle(MainSettingsContainer, "Disable When Unfocused", "Disables auto parrying when the roblox window is not focused.", true, function(v)
+    print("Disable When Unfocused:", v)
+end)
+
+CreateToggle(MainSettingsContainer, "Disable During Dashing", "Prevents auto parrying if your character is dashing.", true, function(v)
+    print("Disable During Dashing:", v)
+end)
+
+-- PARRY MECHANICS Section
+local ParryMechanicsContainer = CreateSection("PARRY MECHANICS")
+
+CreateToggle(ParryMechanicsContainer, "Auto Feint", "Automatically perform a feint (right-clicks) immediately before and potentially during the parry delay.", true, function(v)
+    print("Auto Feint:", v)
+end)
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- UPDATE CANVAS SIZES
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+task.delay(0.2, function()
+    SidebarScroller.CanvasSize = UDim2.new(0, 0, 0, SidebarLayout.AbsoluteContentSize.Y + 20)
+    ContentScroller.CanvasSize = UDim2.new(0, 0, 0, ContentLayout.AbsoluteContentSize.Y + 32)
+end)
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- NOTIFICATION FUNCTION
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+local function Notify(title, message, duration)
+    duration = duration or 3
+    
+    local NotifGui = Create("ScreenGui", {
+        Name = "Notification",
+        Parent = LocalPlayer:WaitForChild("PlayerGui"),
+        ResetOnSpawn = false,
+    })
+    
+    local NotifFrame = Create("Frame", {
+        Name = "Frame",
+        Size = UDim2.new(0, 280, 0, 60),
+        Position = UDim2.new(1, 20, 1, -80),
+        BackgroundColor3 = CONFIG.COLORS.SIDEBAR_BG,
+        BorderSizePixel = 0,
+        Parent = NotifGui,
+    })
+    CreateCorner(NotifFrame, 6)
+    
+    Create("TextLabel", {
+        Name = "Title",
+        Size = UDim2.new(1, -20, 0, 20),
+        Position = UDim2.new(0, 12, 0, 8),
+        BackgroundTransparency = 1,
+        Text = title,
+        TextColor3 = CONFIG.COLORS.TEXT_PRIMARY,
+        TextSize = CONFIG.TEXT_SIZES.REGULAR,
+        Font = CONFIG.FONTS.SUBTITLE,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = NotifFrame,
+    })
+    
+    Create("TextLabel", {
         Name = "Message",
         Size = UDim2.new(1, -20, 0, 30),
         Position = UDim2.new(0, 12, 0, 26),
         BackgroundTransparency = 1,
-        Text = config.Message or "",
+        Text = message,
         TextColor3 = CONFIG.COLORS.TEXT_SECONDARY,
         TextSize = CONFIG.TEXT_SIZES.SMALL,
         Font = CONFIG.FONTS.SMALL,
         TextXAlignment = Enum.TextXAlignment.Left,
         TextWrapped = true,
-        Parent = NotificationFrame,
+        Parent = NotifFrame,
     })
     
-    -- Animate in
-    NotificationFrame.Position = UDim2.new(1, 20, 1, -80)
-    Tween(NotificationFrame, {Position = UDim2.new(1, -300, 1, -80)}, 0.3)
+    Tween(NotifFrame, {Position = UDim2.new(1, -300, 1, -80)}, 0.3)
     
-    -- Auto remove
-    task.delay(config.Duration or 3, function()
-        Tween(NotificationFrame, {Position = UDim2.new(1, 20, 1, -80)}, 0.3).Completed:Wait()
-        NotificationGui:Destroy()
+    task.delay(duration, function()
+        Tween(NotifFrame, {Position = UDim2.new(1, 20, 1, -80)}, 0.3).Completed:Wait()
+        NotifGui:Destroy()
     end)
 end
 
--- ═══════════════════════════════════════════════════════════════
--- RETURN LIBRARY
--- ═══════════════════════════════════════════════════════════════
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- WELCOME NOTIFICATION
+-- ═══════════════════════════════════════════════════════════════════════════════
 
-return EthosUI
+task.delay(0.5, function()
+    Notify("Ethos Suite Loaded", "GUI successfully initialized. Welcome!", 4)
+end)
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- PRINT SUCCESS MESSAGE
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+print([[
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║                    ETHOS SUITE - SUCCESSFULLY LOADED                          ║
+║                         Pixel Perfect GUI v1.0.0                              ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+]])
+
+-- Return the GUI object for external access
+return {
+    ScreenGui = ScreenGui,
+    MainFrame = MainFrame,
+    Notify = Notify,
+}
