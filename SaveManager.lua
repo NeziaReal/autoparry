@@ -5,15 +5,14 @@ SaveManager.Folder = "KitsuConfigs"
 SaveManager.Ignore = {}
 SaveManager.Library = nil
 
--- Kitsu stores values in Library.Flags[flag] = value
--- Kitsu stores callbacks in Library.FlagCallbacks[flag] = function
-
+--// IGNORE LIST
 function SaveManager:SetIgnoreIndexes(list)
     for _, key in next, list do
         self.Ignore[key] = true
     end
 end
 
+--// FOLDER SETUP
 function SaveManager:SetFolder(folder)
     self.Folder = folder
     self:BuildFolderTree()
@@ -41,6 +40,7 @@ function SaveManager:BuildFolderTree()
     end
 end
 
+--// SAVE FUNCTION
 function SaveManager:Save(name)
     if not self.Library then return false end
     self:BuildFolderTree()
@@ -72,6 +72,7 @@ function SaveManager:Save(name)
     return false
 end
 
+--// LOAD FUNCTION
 function SaveManager:Load(name)
     if not self.Library then return false end
     
@@ -93,9 +94,7 @@ function SaveManager:Load(name)
             -- Update the flag value
             self.Library.Flags[flag] = value
             
-            -- Trigger the callback to update the game state
-            -- Note: Visual UI elements (sliders/toggles) won't visually update 
-            -- unless the specific element object was saved, but the logic will work.
+            -- Trigger the callback
             if self.Library.FlagCallbacks[flag] then
                 pcall(function() 
                     self.Library.FlagCallbacks[flag](value) 
@@ -112,6 +111,7 @@ function SaveManager:Load(name)
     return false
 end
 
+--// DELETE CONFIG
 function SaveManager:DeleteConfig(name)
     local fullPath = self.Folder .. "/" .. name .. ".json"
     
@@ -126,6 +126,7 @@ function SaveManager:DeleteConfig(name)
     return false
 end
 
+--// LIST CONFIGS
 function SaveManager:ListConfigs()
     local configs = {}
     
@@ -146,6 +147,7 @@ function SaveManager:ListConfigs()
     return configs
 end
 
+--// AUTOLOAD HELPERS
 function SaveManager:SetAutoloadConfig(name)
     writefile(self.Folder .. "/__autoload.txt", name)
 end
@@ -161,7 +163,7 @@ end
 function SaveManager:LoadAutoloadConfig()
     local name = self:GetAutoloadConfig()
     if name then
-        task.wait(1.5) -- Wait for UI to load
+        task.wait(1.5)
         return self:Load(name)
     end
     return false
@@ -171,9 +173,20 @@ function SaveManager:IgnoreThemeSettings()
     self:SetIgnoreIndexes({ "InterfaceTheme", "InterfaceTransparency" })
 end
 
--- Matches Kitsu UI Syntax: Section:CreateInput, Section:CreateButton
-function SaveManager:BuildConfigSection(section)
+--// UI BUILDER (FIXED FOR TAB vs SECTION ERROR)
+function SaveManager:BuildConfigSection(container)
     
+    -- Check if 'container' is a Tab (has CreateSection) or a Section (has CreateInput)
+    local section = container
+    
+    -- If we passed a Tab, create a Section for it automatically
+    if not container.CreateInput and container.CreateSection then
+        section = container:CreateSection("Configuration Manager")
+    elseif not container.CreateInput and not container.CreateSection then
+        warn("[SaveManager] Invalid container passed to BuildConfigSection. Expected Tab or Section.")
+        return
+    end
+
     local configName = ""
     
     section:CreateInput("Config Name", "Create or select a name", "Enter config name...", function(value)
@@ -207,11 +220,11 @@ function SaveManager:BuildConfigSection(section)
     section:CreateButton("Refresh / List Configs", "Check console (F9) for list", function()
         local configs = self:ListConfigs()
         if #configs > 0 then
-            -- Kitsu Notify is small, so we print list to console and notify user
-            print("--- SAVED CONFIGS ---")
+            print("\n--- SAVED CONFIGS ---")
             for _, cfg in pairs(configs) do
                 print(cfg)
             end
+            print("---------------------\n")
             self.Library:Notify("Saved Configs", "List printed to console (F9)", 3)
         else
             self.Library:Notify("No Configs", "No saved configurations found!", 2)
