@@ -987,6 +987,7 @@ function Library:New(options)
                 })
             end
 
+
             function Elements:CreateButton(text, desc, callback)
                 local BtnFrame = Create("Frame", {
                     Parent = Box,
@@ -996,6 +997,7 @@ function Library:New(options)
                     ZIndex = 20
                 })
 
+                -- Label on the left
                 Create("TextLabel", {
                     Parent = BtnFrame,
                     Text = text,
@@ -1003,11 +1005,12 @@ function Library:New(options)
                     TextColor3 = Theme.Text,
                     TextSize = 12,
                     BackgroundTransparency = 1,
-                    Size = UDim2.new(1, 0, 0, 14),
+                    Size = UDim2.new(0.5, -5, 0, 14),
                     TextXAlignment = Enum.TextXAlignment.Left
                 })
 
-                if desc then
+                -- Description below label (if provided)
+                if desc and desc ~= "" then
                     local DescLabel = Create("TextLabel", {
                         Parent = BtnFrame,
                         Text = desc,
@@ -1015,22 +1018,23 @@ function Library:New(options)
                         TextColor3 = Theme.TextDim,
                         TextSize = 10,
                         BackgroundTransparency = 1,
-                        Position = UDim2.new(0, 0, 0, 13),
-                        Size = UDim2.new(1, 0, 0, 12),
-                        TextXAlignment = Enum.TextXAlignment.Left
+                        Position = UDim2.new(0, 0, 0, 14),
+                        Size = UDim2.new(0.5, -5, 0, 0),
+                        AutomaticSize = Enum.AutomaticSize.Y,
+                        TextXAlignment = Enum.TextXAlignment.Left,
+                        TextWrapped = true
                     })
                     AddHoverEffect(DescLabel, Theme.TextDim, Theme.TextHover)
                 end
 
+                -- Button on the right side (matching dropdown style)
                 local Btn = Create("TextButton", {
                     Parent = BtnFrame,
                     BackgroundColor3 = Theme.Main,
-                    Position = UDim2.new(0, 0, 0, desc and 30 or 20),
-                    Size = UDim2.new(1, 0, 0, 28),
-                    Text = "EXECUTE",
-                    Font = Enum.Font.GothamBold,
-                    TextColor3 = UI_CONFIG.Accent,
-                    TextSize = 11,
+                    AnchorPoint = Vector2.new(1, 0),
+                    Position = UDim2.new(1, 0, 0, 0),
+                    Size = UDim2.new(0.5, -5, 0, 28),
+                    Text = "",
                     AutoButtonColor = false,
                     ZIndex = 21
                 }, {
@@ -1038,23 +1042,83 @@ function Library:New(options)
                 })
                 ApplyStroke(Btn, Theme.Stroke, 1)
 
+                -- Button label centered inside
+                local BtnLabel = Create("TextLabel", {
+                    Parent = Btn,
+                    Text = "EXECUTE",
+                    Font = Enum.Font.GothamBold,
+                    TextColor3 = UI_CONFIG.Accent,
+                    TextSize = 11,
+                    BackgroundTransparency = 1,
+                    Size = UDim2.new(1, 0, 1, 0),
+                    TextXAlignment = Enum.TextXAlignment.Center,
+                    ZIndex = 22
+                })
+
+                -- Hover effect
+                Btn.MouseEnter:Connect(function()
+                    TweenService:Create(Btn, TweenInfo.new(0.15), { 
+                        BackgroundColor3 = Color3.fromRGB(20, 20, 20) 
+                    }):Play()
+                    TweenService:Create(BtnLabel, TweenInfo.new(0.15), { 
+                        TextColor3 = Color3.fromRGB(255, 255, 255) 
+                    }):Play()
+                end)
+
+                Btn.MouseLeave:Connect(function()
+                    TweenService:Create(Btn, TweenInfo.new(0.15), { 
+                        BackgroundColor3 = Theme.Main 
+                    }):Play()
+                    TweenService:Create(BtnLabel, TweenInfo.new(0.15), { 
+                        TextColor3 = UI_CONFIG.Accent 
+                    }):Play()
+                end)
+
+                -- Click effect
                 Btn.MouseButton1Click:Connect(function()
-                    TweenService:Create(Btn, TweenInfo.new(0.1), { BackgroundColor3 = UI_CONFIG.Accent }):Play()
-                    task.wait(0.1)
-                    TweenService:Create(Btn, TweenInfo.new(0.1), { BackgroundColor3 = Theme.Main }):Play()
+                    TweenService:Create(Btn, TweenInfo.new(0.1), { 
+                        BackgroundColor3 = UI_CONFIG.Accent 
+                    }):Play()
+                    TweenService:Create(BtnLabel, TweenInfo.new(0.1), { 
+                        TextColor3 = Color3.fromRGB(255, 255, 255) 
+                    }):Play()
+                    
+                    task.wait(0.15)
+                    
+                    TweenService:Create(Btn, TweenInfo.new(0.15), { 
+                        BackgroundColor3 = Theme.Main 
+                    }):Play()
+                    TweenService:Create(BtnLabel, TweenInfo.new(0.15), { 
+                        TextColor3 = UI_CONFIG.Accent 
+                    }):Play()
+                    
                     if callback then pcall(callback) end
                 end)
                 
+                -- Touch support for mobile
                 Btn.InputBegan:Connect(function(input)
                     if input.UserInputType == Enum.UserInputType.Touch then
-                        TweenService:Create(Btn, TweenInfo.new(0.1), { BackgroundColor3 = UI_CONFIG.Accent }):Play()
-                        task.wait(0.1)
-                        TweenService:Create(Btn, TweenInfo.new(0.1), { BackgroundColor3 = Theme.Main }):Play()
+                        TweenService:Create(Btn, TweenInfo.new(0.1), { 
+                            BackgroundColor3 = UI_CONFIG.Accent 
+                        }):Play()
+                        TweenService:Create(BtnLabel, TweenInfo.new(0.1), { 
+                            TextColor3 = Color3.fromRGB(255, 255, 255) 
+                        }):Play()
+                        
+                        task.wait(0.15)
+                        
+                        TweenService:Create(Btn, TweenInfo.new(0.15), { 
+                            BackgroundColor3 = Theme.Main 
+                        }):Play()
+                        TweenService:Create(BtnLabel, TweenInfo.new(0.15), { 
+                            TextColor3 = UI_CONFIG.Accent 
+                        }):Play()
+                        
                         if callback then pcall(callback) end
                     end
                 end)
                 
-                Create("UIPadding", { Parent = BtnFrame, PaddingBottom = UDim.new(0, 3) })
+                Create("UIPadding", { Parent = BtnFrame, PaddingBottom = UDim.new(0, 8) })
             end
 
             function Elements:CreateKeybind(text, desc, defaultKey, callback, flag)
