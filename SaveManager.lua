@@ -35,6 +35,21 @@ function SaveManager:SetIgnoreIndexes(list)
     end
 end
 
+-- Backwards compatibility: Does nothing since UI auto-stores in Library.Options
+function SaveManager:RegisterElement(flag, element)
+    if not self.Library then
+        warn("[SaveManager] Library not set! Call SetLibrary() first.")
+        return false
+    end
+    
+    -- UI library already stores elements automatically in Library.Options
+    -- This function exists only for backwards compatibility
+    -- You don't need to call this function anymore!
+    
+    print("[SaveManager] RegisterElement called for '" .. tostring(flag) .. "' but it's not needed anymore")
+    return true
+end
+
 --// SAVE
 function SaveManager:Save(name)
     if not self.Library then 
