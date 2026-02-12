@@ -1052,7 +1052,7 @@ function Library:New(options)
                 -- Button label centered inside
                 local BtnLabel = Create("TextLabel", {
                     Parent = Btn,
-                    Text = "EXECUTE",
+                    Text = "Click",
                     Font = Enum.Font.GothamBold,
                     TextColor3 = UI_CONFIG.Accent,
                     TextSize = 11,
