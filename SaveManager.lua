@@ -242,7 +242,7 @@ function SaveManager:IgnoreThemeSettings()
 end
 
 function SaveManager:BuildConfigSection(tab)
-    tab:CreateLabel("Configuration: Manage Saved Configs")
+    tab:CreateLabel("Configuration Manage Saved Configs")
     
     local configName = ""
     
@@ -361,3 +361,4 @@ function SaveManager:BuildConfigSection(tab)
 end
 
 return SaveManager
+
