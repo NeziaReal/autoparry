@@ -719,20 +719,6 @@ function Library:New(options)
 
             local Elements = {}
 
-            function Elements:AddLabel(text)
-                Create("TextLabel", {
-                    Parent = Box,
-                    Text = string.upper(text),
-                    Font = UI_CONFIG.FontMain,
-                    TextColor3 = Library.Theme.TextDim,
-                    TextSize = 11,
-                    BackgroundTransparency = 1,
-                    Size = UDim2.new(1, 0, 0, 20),
-                    TextXAlignment = Enum.TextXAlignment.Left,
-                    FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-                })
-            end
-
             function Elements:CreateToggle(flag, options)
                 local title = options.Title or "Toggle"
                 local default = options.Default or false
@@ -843,172 +829,168 @@ function Library:New(options)
             end
 
             function Elements:CreateSlider(flag, options)
-                local title = options.Title or "Slider"
-                local min = options.Min or 0
-                local max = options.Max or 100
-                local default = options.Default or min
-                local callback = options.Callback or function() end
-                
-                Library.Flags[flag] = default
-                
-                local SliderFrame = Create("Frame", {
-                    Parent = Box,
-                    BackgroundTransparency = 1,
-                    Size = UDim2.new(1, 0, 0, 0),
-                    AutomaticSize = Enum.AutomaticSize.Y,
-                    ZIndex = 20
-                })
+    local title = options.Title or "Slider"
+    local min = options.Min or 0
+    local max = options.Max or 100
+    local default = options.Default or min
+    local callback = options.Callback or function() end
+    
+    Library.Flags[flag] = default
+    
+    local SliderFrame = Create("Frame", {
+        Parent = Box,
+        BackgroundTransparency = 1,
+        Size = UDim2.new(1, 0, 0, 0),
+        AutomaticSize = Enum.AutomaticSize.Y,
+        ZIndex = 20
+    })
 
-                -- Title and value on same line
-                local TitleFrame = Create("Frame", {
-                    Parent = SliderFrame,
-                    BackgroundTransparency = 1,
-                    Size = UDim2.new(1, 0, 0, 16)
-                })
+    -- Title label on the left (no value here)
+    Create("TextLabel", {
+        Parent = SliderFrame,
+        Text = title,
+        Font = UI_CONFIG.FontMain,
+        TextColor3 = Library.Theme.Text,
+        TextSize = 13,
+        BackgroundTransparency = 1,
+        Size = UDim2.new(0.5, 0, 0, 16),
+        TextXAlignment = Enum.TextXAlignment.Left,
+        FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+    })
+    
+    -- Description below title (if provided)
+    if options.Description then
+        Create("TextLabel", {
+            Parent = SliderFrame,
+            Text = options.Description,
+            Font = UI_CONFIG.FontBody,
+            TextColor3 = Library.Theme.TextDim,
+            TextSize = 11,
+            BackgroundTransparency = 1,
+            Position = UDim2.new(0, 0, 0, 18),
+            Size = UDim2.new(0.5, 0, 0, 14),
+            TextXAlignment = Enum.TextXAlignment.Left,
+            FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+        })
+    end
 
-                Create("TextLabel", {
-                    Parent = TitleFrame,
-                    Text = title,
-                    Font = UI_CONFIG.FontMain,
-                    TextColor3 = Library.Theme.Text,
-                    TextSize = 13,
-                    BackgroundTransparency = 1,
-                    Size = UDim2.new(1, -50, 1, 0),
-                    TextXAlignment = Enum.TextXAlignment.Left,
-                    FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-                })
-                
-                local ValueLabel = Create("TextLabel", {
-                    Parent = TitleFrame,
-                    Text = tostring(default),
-                    Font = UI_CONFIG.FontNumber,
-                    TextColor3 = Library.Theme.TextDim,
-                    TextSize = 13,
-                    BackgroundTransparency = 1,
-                    AnchorPoint = Vector2.new(1, 0),
-                    Position = UDim2.new(1, 0, 0, 0),
-                    Size = UDim2.new(0, 40, 1, 0),
-                    TextXAlignment = Enum.TextXAlignment.Right,
-                    FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
-                })
+    -- Value label positioned on the right side
+    local ValueLabel = Create("TextLabel", {
+        Parent = SliderFrame,
+        Text = tostring(default),
+        Font = UI_CONFIG.FontNumber,
+        TextColor3 = Library.Theme.Text,
+        TextSize = 14,
+        BackgroundTransparency = 1,
+        AnchorPoint = Vector2.new(1, 0),
+        Position = UDim2.new(1, 0, 0, 0),
+        Size = UDim2.new(0, 40, 0, 16),
+        TextXAlignment = Enum.TextXAlignment.Right,
+        FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+    })
 
-                if options.Description then
-                    Create("TextLabel", {
-                        Parent = SliderFrame,
-                        Text = options.Description,
-                        Font = UI_CONFIG.FontBody,
-                        TextColor3 = Library.Theme.TextDim,
-                        TextSize = 11,
-                        BackgroundTransparency = 1,
-                        Position = UDim2.new(0, 0, 0, 18),
-                        Size = UDim2.new(1, 0, 0, 14),
-                        TextXAlignment = Enum.TextXAlignment.Left,
-                        TextWrapped = true,
-                        FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
-                    })
-                end
+    -- Slider track positioned on the right half
+    local Track = Create("Frame", {
+        Parent = SliderFrame,
+        BackgroundColor3 = Library.Theme.Main,
+        Position = UDim2.new(0.5, 10, 0, options.Description and 46 or 30),
+        Size = UDim2.new(0.5, -55, 0, 5),
+        ZIndex = 21
+    }, { Create("UICorner", { CornerRadius = UDim.new(1, 0) }) })
+    ApplyStroke(Track, Library.Theme.Stroke, 1)
 
-                local Track = Create("Frame", {
-                    Parent = SliderFrame,
-                    BackgroundColor3 = Library.Theme.Main,
-                    Position = UDim2.new(0, 0, 0, options.Description and 46 or 26),
-                    Size = UDim2.new(1, 0, 0, 5),
-                    ZIndex = 21
-                }, { Create("UICorner", { CornerRadius = UDim.new(1, 0) }) })
-                ApplyStroke(Track, Library.Theme.Stroke, 1)
+    local Fill = Create("Frame", {
+        Parent = Track,
+        BackgroundColor3 = UI_CONFIG.Accent,
+        Size = UDim2.new((default - min) / (max - min), 0, 1, 0),
+        ZIndex = 22
+    }, { Create("UICorner", { CornerRadius = UDim.new(1, 0) }) })
 
-                local Fill = Create("Frame", {
-                    Parent = Track,
-                    BackgroundColor3 = UI_CONFIG.Accent,
-                    Size = UDim2.new((default - min) / (max - min), 0, 1, 0),
-                    ZIndex = 22
-                }, { Create("UICorner", { CornerRadius = UDim.new(1, 0) }) })
+    local Knob = Create("Frame", {
+        Parent = Track,
+        BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+        Size = UDim2.new(0, 16, 0, 16),
+        AnchorPoint = Vector2.new(0.5, 0.5),
+        Position = UDim2.new((default - min) / (max - min), 0, 0.5, 0),
+        ZIndex = 23
+    }, {
+        Create("UICorner", { CornerRadius = UDim.new(1, 0) }),
+        ApplyStroke(nil, UI_CONFIG.Accent, 1.5)
+    })
 
-                local Knob = Create("Frame", {
-                    Parent = Track,
-                    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-                    Size = UDim2.new(0, 16, 0, 16),
-                    AnchorPoint = Vector2.new(0.5, 0.5),
-                    Position = UDim2.new((default - min) / (max - min), 0, 0.5, 0),
-                    ZIndex = 23
-                }, {
-                    Create("UICorner", { CornerRadius = UDim.new(1, 0) }),
-                    ApplyStroke(nil, UI_CONFIG.Accent, 1.5)
-                })
+    local dragging = false
+    local callbacks = {}
+    local currentValue = default
 
-                local dragging = false
-                local callbacks = {}
-                local currentValue = default
-
-                local function updateSlider(input)
-                    local percent = math.clamp((input.Position.X - Track.AbsolutePosition.X) / Track.AbsoluteSize.X, 0, 1)
-                    local value = math.floor(min + (max - min) * percent + 0.5)
-                    if value ~= currentValue then
-                        currentValue = value
-                        Fill.Size = UDim2.new(percent, 0, 1, 0)
-                        Knob.Position = UDim2.new(percent, 0, 0.5, 0)
-                        ValueLabel.Text = tostring(value)
-                        Library.Flags[flag] = value
-                        for _, cb in pairs(callbacks) do
-                            task.spawn(cb, value)
-                        end
-                    end
-                end
-
-                Track.InputBegan:Connect(function(input)
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                        dragging = true
-                        updateSlider(input)
-                    end
-                end)
-
-                Track.InputEnded:Connect(function(input)
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                        dragging = false
-                    end
-                end)
-
-                Knob.InputBegan:Connect(function(input)
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                        dragging = true
-                    end
-                end)
-
-                Knob.InputEnded:Connect(function(input)
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                        dragging = false
-                    end
-                end)
-
-                UserInputService.InputChanged:Connect(function(input)
-                    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-                        updateSlider(input)
-                    end
-                end)
-
-                local SliderObj = {
-                    Value = currentValue,
-                    OnChanged = function(self, callback)
-                        table.insert(callbacks, callback)
-                        return self
-                    end,
-                    SetValue = function(self, value)
-                        local clamped = math.clamp(value, min, max)
-                        local percent = (clamped - min) / (max - min)
-                        currentValue = clamped
-                        Fill.Size = UDim2.new(percent, 0, 1, 0)
-                        Knob.Position = UDim2.new(percent, 0, 0.5, 0)
-                        ValueLabel.Text = tostring(clamped)
-                        Library.Flags[flag] = clamped
-                        self.Value = clamped
-                    end
-                }
-                
-                Library.Options[flag] = SliderObj
-                SliderObj:OnChanged(callback)
-                Create("UIPadding", { Parent = SliderFrame, PaddingBottom = UDim.new(0, 12) })
-                return SliderObj
+    local function updateSlider(input)
+        local percent = math.clamp((input.Position.X - Track.AbsolutePosition.X) / Track.AbsoluteSize.X, 0, 1)
+        local value = math.floor(min + (max - min) * percent + 0.5)
+        if value ~= currentValue then
+            currentValue = value
+            Fill.Size = UDim2.new(percent, 0, 1, 0)
+            Knob.Position = UDim2.new(percent, 0, 0.5, 0)
+            ValueLabel.Text = tostring(value)
+            Library.Flags[flag] = value
+            for _, cb in pairs(callbacks) do
+                task.spawn(cb, value)
             end
+        end
+    end
+
+    Track.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            updateSlider(input)
+        end
+    end)
+
+    Track.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = false
+        end
+    end)
+
+    Knob.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+        end
+    end)
+
+    Knob.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = false
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+            updateSlider(input)
+        end
+    end)
+
+    local SliderObj = {
+        Value = currentValue,
+        OnChanged = function(self, callback)
+            table.insert(callbacks, callback)
+            return self
+        end,
+        SetValue = function(self, value)
+            local clamped = math.clamp(value, min, max)
+            local percent = (clamped - min) / (max - min)
+            currentValue = clamped
+            Fill.Size = UDim2.new(percent, 0, 1, 0)
+            Knob.Position = UDim2.new(percent, 0, 0.5, 0)
+            ValueLabel.Text = tostring(clamped)
+            Library.Flags[flag] = clamped
+            self.Value = clamped
+        end
+    }
+    
+    Library.Options[flag] = SliderObj
+    SliderObj:OnChanged(callback)
+    Create("UIPadding", { Parent = SliderFrame, PaddingBottom = UDim.new(0, 12) })
+    return SliderObj
+end
 
             function Elements:CreateDropdown(flag, options)
                 local title = options.Title or "Dropdown"
@@ -1039,34 +1021,16 @@ function Library:New(options)
                 })
 
                 if options.Description then
-                    local DescFrame = Create("Frame", {
-                        Parent = DropdownFrame,
-                        BackgroundColor3 = Color3.fromRGB(20, 20, 20),
-                        Position = UDim2.new(0, 0, 0, 18),
-                        Size = UDim2.new(1, 0, 0, 0),
-                        AutomaticSize = Enum.AutomaticSize.Y,
-                        ZIndex = 19
-                    }, {
-                        Create("UICorner", { CornerRadius = UDim.new(0, 6) }),
-                        Create("UIPadding", {
-                            PaddingLeft = UDim.new(0, 12),
-                            PaddingRight = UDim.new(0, 12),
-                            PaddingTop = UDim.new(0, 10),
-                            PaddingBottom = UDim.new(0, 10)
-                        })
-                    })
-                    
                     Create("TextLabel", {
-                        Parent = DescFrame,
+                        Parent = DropdownFrame,
                         Text = options.Description,
                         Font = UI_CONFIG.FontBody,
                         TextColor3 = Library.Theme.TextDim,
                         TextSize = 11,
                         BackgroundTransparency = 1,
-                        Size = UDim2.new(1, 0, 0, 0),
-                        AutomaticSize = Enum.AutomaticSize.Y,
+                        Position = UDim2.new(0, 0, 0, 18),
+                        Size = UDim2.new(1, 0, 0, 14),
                         TextXAlignment = Enum.TextXAlignment.Left,
-                        TextWrapped = true,
                         FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
                     })
                 end
