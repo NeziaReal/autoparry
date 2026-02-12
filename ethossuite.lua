@@ -19,6 +19,8 @@ local Library = {}
 Library.Flags = {}
 Library.FlagCallbacks = {}
 Library.Options = {}  -- Store all UI element objects for SaveManager
+Library.ToggleKey = Enum.KeyCode.RightShift  -- Default toggle key
+Library.Visible = true
 
 --// MOBILE DETECTION
 local IsMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
@@ -331,9 +333,7 @@ function Library:New(options)
         TweenService:Create(MinimizeBtn, TweenInfo.new(0.2), {TextColor3 = Theme.TextDim}):Play()
     end)
     MinimizeBtn.MouseButton1Click:Connect(function()
-        MainFrame.Visible = false
-        task.wait(0.1)
-        MainFrame.Visible = true
+        MainFrame.Visible = not MainFrame.Visible
     end)
 
     local CloseBtn = Create("TextButton", {
@@ -1052,9 +1052,9 @@ function Library:New(options)
                 -- Button label centered inside
                 local BtnLabel = Create("TextLabel", {
                     Parent = Btn,
-                    Text = "Click",
+                    Text = "EXECUTE",
                     Font = Enum.Font.GothamBold,
-                    TextColor3 = Color3.fromRGB(255, 255, 255),
+                    TextColor3 = UI_CONFIG.Accent,
                     TextSize = 11,
                     BackgroundTransparency = 1,
                     Size = UDim2.new(1, 0, 1, 0),
@@ -1511,7 +1511,50 @@ function Library:New(options)
     
     Window.AddTab = Window.CreateTab
     
+    -- Toggle function - show/hide the UI
+    function Window:Toggle()
+        MainFrame.Visible = not MainFrame.Visible
+        Library.Visible = MainFrame.Visible
+    end
+    
+    -- Unload function - completely destroy the UI
+    function Window:Unload()
+        if ScreenGui then
+            ScreenGui:Destroy()
+        end
+        Library.Visible = false
+    end
+    
+    -- Store references for Library.Toggle and Library.Unload
+    Library.MainFrame = MainFrame
+    Library.ScreenGui = ScreenGui
+    
     return Window
 end
+
+-- Add global toggle and unload functions
+function Library:Toggle()
+    if self.MainFrame then
+        self.MainFrame.Visible = not self.MainFrame.Visible
+        self.Visible = self.MainFrame.Visible
+    end
+end
+
+function Library:Unload()
+    if self.ScreenGui then
+        self.ScreenGui:Destroy()
+        self.ScreenGui = nil
+        self.MainFrame = nil
+    end
+    self.Visible = false
+end
+
+-- Setup default toggle keybind (RightShift)
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == Library.ToggleKey then
+        Library:Toggle()
+    end
+end)
 
 return Library
