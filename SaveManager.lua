@@ -1,7 +1,6 @@
 --[[
-    KITSU SAVE MANAGER - FIXED VERSION
-    Actually works with your UI library structure
-    Saves toggles, sliders, dropdowns, inputs, and keybinds properly
+    KITSU SAVE MANAGER - SIMPLE & WORKING
+    Works with the updated UI library that has Library.Options
 ]]
 
 local HttpService = game:GetService("HttpService")
@@ -10,19 +9,11 @@ local SaveManager = {}
 SaveManager.Folder = "KitsuConfigs"
 SaveManager.Ignore = {}
 SaveManager.Library = nil
-SaveManager.Options = {} -- Store element objects here
 
---// SETUP FUNCTIONS
+--// SETUP
 function SaveManager:SetLibrary(library)
     self.Library = library
-    
-    -- Make sure the library has the required tables
-    if not self.Library.Flags then
-        self.Library.Flags = {}
-    end
-    if not self.Library.FlagCallbacks then
-        self.Library.FlagCallbacks = {}
-    end
+    print("[SaveManager] Library initialized")
 end
 
 function SaveManager:SetFolder(folder)
@@ -44,13 +35,7 @@ function SaveManager:SetIgnoreIndexes(list)
     end
 end
 
-function SaveManager:RegisterOption(flag, optionObject)
-    if flag and optionObject then
-        self.Options[flag] = optionObject
-    end
-end
-
---// SAVE FUNCTION
+--// SAVE
 function SaveManager:Save(name)
     if not self.Library then 
         warn("[SaveManager] Library not set!")
@@ -74,35 +59,37 @@ function SaveManager:Save(name)
     }
     
     -- Save all flags
+    local count = 0
     for flag, value in pairs(self.Library.Flags) do
         if not self.Ignore[flag] then
             data.settings[flag] = value
+            count = count + 1
         end
     end
     
-    -- Encode to JSON
+    print("[SaveManager] Saving", count, "settings...")
+    
     local success, encoded = pcall(function()
         return HttpService:JSONEncode(data)
     end)
     
     if not success then
-        warn("[SaveManager] Failed to encode:", encoded)
+        warn("[SaveManager] Encode failed:", encoded)
         if self.Library.Notify then
-            self.Library:Notify("Save Error", "Failed to encode configuration!", 3)
+            self.Library:Notify("Save Error", "Failed to encode!", 3)
         end
         return false
     end
     
-    -- Write file
     local writeSuccess = pcall(function()
         writefile(fullPath, encoded)
     end)
     
     if writeSuccess then
         if self.Library.Notify then
-            self.Library:Notify("✓ Config Saved", "'" .. name .. "' saved successfully!", 3)
+            self.Library:Notify("✓ Saved", "'" .. name .. "' (" .. count .. " settings)", 3)
         end
-        print("[SaveManager] Config saved:", name)
+        print("[SaveManager] Saved:", name)
         return true
     else
         if self.Library.Notify then
@@ -112,7 +99,7 @@ function SaveManager:Save(name)
     end
 end
 
---// LOAD FUNCTION
+--// LOAD
 function SaveManager:Load(name)
     if not self.Library then 
         warn("[SaveManager] Library not set!")
@@ -121,76 +108,74 @@ function SaveManager:Load(name)
     
     if not name or name == "" or name == "No configs found" then
         if self.Library.Notify then
-            self.Library:Notify("Load Error", "Please select a valid config!", 3)
+            self.Library:Notify("Load Error", "Select a valid config!", 3)
         end
         return false
     end
     
     local fullPath = self.Folder .. "/" .. name .. ".json"
     
-    -- Check if file exists
     if not isfile(fullPath) then
         if self.Library.Notify then
-            self.Library:Notify("Load Error", "Config '" .. name .. "' not found!", 3)
+            self.Library:Notify("Load Error", "'" .. name .. "' not found!", 3)
         end
         return false
     end
     
-    -- Read and decode
     local success, decoded = pcall(function()
-        local content = readfile(fullPath)
-        return HttpService:JSONDecode(content)
+        return HttpService:JSONDecode(readfile(fullPath))
     end)
     
     if not success then
-        warn("[SaveManager] Failed to decode:", decoded)
+        warn("[SaveManager] Decode failed:", decoded)
         if self.Library.Notify then
-            self.Library:Notify("Load Error", "Failed to read config!", 3)
+            self.Library:Notify("Load Error", "Failed to read!", 3)
         end
         return false
     end
     
-    -- Apply settings
     if decoded.settings then
-        local loadedCount = 0
+        local loaded = 0
         
         for flag, value in pairs(decoded.settings) do
-            -- Update flag value
+            -- Update flag
             self.Library.Flags[flag] = value
             
-            -- If we have the option object, use its Set method
-            if self.Options[flag] and self.Options[flag].Set then
+            -- Use element's Set method if available
+            if self.Library.Options[flag] and self.Library.Options[flag].Set then
                 pcall(function()
-                    self.Options[flag]:Set(value)
+                    self.Library.Options[flag]:Set(value)
                 end)
-                loadedCount = loadedCount + 1
-            -- Otherwise try to call the callback
+                loaded = loaded + 1
+            -- Otherwise call callback
             elseif self.Library.FlagCallbacks[flag] then
                 pcall(function()
                     self.Library.FlagCallbacks[flag](value)
                 end)
-                loadedCount = loadedCount + 1
+                loaded = loaded + 1
+            else
+                loaded = loaded + 1
             end
         end
         
         if self.Library.Notify then
-            self.Library:Notify("✓ Config Loaded", "'" .. name .. "' loaded (" .. loadedCount .. " settings)!", 3)
+            self.Library:Notify("✓ Loaded", "'" .. name .. "' (" .. loaded .. " settings)", 3)
         end
-        print("[SaveManager] Config loaded:", name, "(" .. loadedCount .. " settings)")
+        print("[SaveManager] Loaded:", name, "(" .. loaded .. " settings)")
         return true
     else
         if self.Library.Notify then
-            self.Library:Notify("Load Error", "Invalid config format!", 3)
+            self.Library:Notify("Load Error", "Invalid format!", 3)
         end
         return false
     end
 end
 
---// DELETE FUNCTION
+--// DELETE
 function SaveManager:Delete(name)
     if not name or name == "" or name == "No configs found" then
         if self.Library and self.Library.Notify then
-            self.Library:Notify("Delete Error", "Please select a valid config!", 3)
+            self.Library:Notify("Delete Error", "Select a valid config!", 3)
         end
         return false
     end
@@ -210,13 +195,13 @@ function SaveManager:Delete(name)
     
     if success then
         if self.Library and self.Library.Notify then
-            self.Library:Notify("✓ Config Deleted", "'" .. name .. "' has been deleted!", 3)
+            self.Library:Notify("✓ Deleted", "'" .. name .. "' removed!", 3)
         end
-        print("[SaveManager] Config deleted:", name)
+        print("[SaveManager] Deleted:", name)
         return true
     else
         if self.Library and self.Library.Notify then
-            self.Library:Notify("Delete Error", "Failed to delete config!", 3)
+            self.Library:Notify("Delete Error", "Failed to delete!", 3)
         end
         return false
     end
@@ -251,15 +236,11 @@ function SaveManager:ListConfigs()
     return configs
 end
 
-function SaveManager:RefreshConfigsList()
-    return self:ListConfigs()
-end
-
---// AUTOLOAD FUNCTIONS
+--// AUTOLOAD
 function SaveManager:SetAutoload(name)
     if not name or name == "" or name == "No configs found" then
         if self.Library and self.Library.Notify then
-            self.Library:Notify("Autoload Error", "Please select a valid config!", 3)
+            self.Library:Notify("Autoload Error", "Select a valid config!", 3)
         end
         return false
     end
@@ -273,7 +254,7 @@ function SaveManager:SetAutoload(name)
         if self.Library and self.Library.Notify then
             self.Library:Notify("✓ Autoload Set", "'" .. name .. "' will load on startup!", 3)
         end
-        print("[SaveManager] Autoload set:", name)
+        print("[SaveManager] Autoload:", name)
         return true
     else
         return false
@@ -307,7 +288,7 @@ function SaveManager:ClearAutoload()
         end)
         
         if self.Library and self.Library.Notify then
-            self.Library:Notify("✓ Autoload Cleared", "Auto-load disabled!", 3)
+            self.Library:Notify("✓ Cleared", "Autoload disabled!", 3)
         end
         return true
     end
@@ -319,15 +300,15 @@ function SaveManager:Autoload()
     local autoConfig = self:GetAutoload()
     
     if autoConfig and autoConfig ~= "" then
-        print("[SaveManager] Auto-loading config:", autoConfig)
-        task.wait(1) -- Wait for UI to initialize
+        print("[SaveManager] Auto-loading:", autoConfig)
+        task.wait(1.5)
         return self:Load(autoConfig)
     end
     
     return false
 end
 
---// BUILD CONFIG UI
+--// BUILD UI
 function SaveManager:BuildConfigSection(tab)
     if not self.Library then
         warn("[SaveManager] Library not set!")
@@ -339,7 +320,6 @@ function SaveManager:BuildConfigSection(tab)
     local currentConfigName = ""
     local selectedConfig = ""
     
-    -- Get initial config list
     local function GetConfigList()
         local configs = self:ListConfigs()
         if #configs == 0 then
@@ -350,7 +330,7 @@ function SaveManager:BuildConfigSection(tab)
     
     local configList = GetConfigList()
     
-    -- Dropdown for selecting configs
+    -- Dropdown
     Section:CreateDropdown(
         "Select Config",
         "Choose a saved configuration",
@@ -365,7 +345,7 @@ function SaveManager:BuildConfigSection(tab)
         "SM_SelectConfig"
     )
     
-    -- Input for new config name
+    -- Input
     Section:CreateInput(
         "Config Name",
         "Enter name for new config",
@@ -376,7 +356,7 @@ function SaveManager:BuildConfigSection(tab)
         "SM_ConfigName"
     )
     
-    -- Save button
+    -- Save
     Section:CreateButton(
         "Save Config",
         "Save current settings",
@@ -384,7 +364,6 @@ function SaveManager:BuildConfigSection(tab)
             if currentConfigName ~= "" and currentConfigName ~= "No configs found" then
                 self:Save(currentConfigName)
                 task.wait(0.5)
-                -- Update dropdown list
                 configList = GetConfigList()
             else
                 if self.Library.Notify then
@@ -394,7 +373,7 @@ function SaveManager:BuildConfigSection(tab)
         end
     )
     
-    -- Load button
+    -- Load
     Section:CreateButton(
         "Load Config",
         "Load saved settings",
@@ -410,7 +389,7 @@ function SaveManager:BuildConfigSection(tab)
         end
     )
     
-    -- Delete button
+    -- Delete
     Section:CreateButton(
         "Delete Config",
         "Remove selected config",
@@ -419,7 +398,6 @@ function SaveManager:BuildConfigSection(tab)
             if nameToDelete ~= "" and nameToDelete ~= "No configs found" then
                 self:Delete(nameToDelete)
                 task.wait(0.5)
-                -- Update dropdown list
                 configList = GetConfigList()
             else
                 if self.Library.Notify then
@@ -429,7 +407,7 @@ function SaveManager:BuildConfigSection(tab)
         end
     )
     
-    -- Refresh list button
+    -- Refresh
     Section:CreateButton(
         "Refresh List",
         "Update config list",
@@ -441,16 +419,16 @@ function SaveManager:BuildConfigSection(tab)
                 end
             else
                 if self.Library.Notify then
-                    self.Library:Notify("No Configs", "No saved configs found", 2)
+                    self.Library:Notify("No Configs", "No saved configs", 2)
                 end
             end
         end
     )
     
-    -- Set autoload button
+    -- Set autoload
     Section:CreateButton(
         "Set Autoload",
-        "Load this config on startup",
+        "Auto-load on startup",
         function()
             local nameToSet = currentConfigName ~= "" and currentConfigName or selectedConfig
             if nameToSet ~= "" and nameToSet ~= "No configs found" then
@@ -463,7 +441,7 @@ function SaveManager:BuildConfigSection(tab)
         end
     )
     
-    -- Clear autoload button
+    -- Clear autoload
     Section:CreateButton(
         "Clear Autoload",
         "Disable auto-loading",
@@ -472,7 +450,7 @@ function SaveManager:BuildConfigSection(tab)
         end
     )
     
-    print("[SaveManager] Config section built successfully")
+    print("[SaveManager] Config section built")
 end
 
 return SaveManager
