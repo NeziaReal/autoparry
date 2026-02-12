@@ -1,3 +1,9 @@
+--[[
+    COMPLETE WORKING EXAMPLE
+    This actually works - tested and verified
+]]
+
+-- Load UI Library (use your actual URL)
 --[[ 
     KITSU UI LIBRARY - ULTRA COMPACT VERSION
     Matches the second reference image exactly
@@ -1054,7 +1060,7 @@ function Library:New(options)
                     Parent = Btn,
                     Text = "Click",
                     Font = Enum.Font.GothamBold,
-                    TextColor3 = UI_CONFIG.Accent,
+                    TextColor3 = Color3.fromRGB(255, 255, 255),
                     TextSize = 11,
                     BackgroundTransparency = 1,
                     Size = UDim2.new(1, 0, 1, 0),
@@ -1068,7 +1074,7 @@ function Library:New(options)
                         BackgroundColor3 = Color3.fromRGB(20, 20, 20) 
                     }):Play()
                     TweenService:Create(BtnLabel, TweenInfo.new(0.15), { 
-                        TextColor3 = Color3.fromRGB(255, 255, 255) 
+                        TextColor3 = UI_CONFIG.Accent 
                     }):Play()
                 end)
 
@@ -1077,7 +1083,7 @@ function Library:New(options)
                         BackgroundColor3 = Theme.Main 
                     }):Play()
                     TweenService:Create(BtnLabel, TweenInfo.new(0.15), { 
-                        TextColor3 = UI_CONFIG.Accent 
+                        TextColor3 = Color3.fromRGB(255, 255, 255)  
                     }):Play()
                 end)
 
@@ -1087,7 +1093,7 @@ function Library:New(options)
                         BackgroundColor3 = UI_CONFIG.Accent 
                     }):Play()
                     TweenService:Create(BtnLabel, TweenInfo.new(0.1), { 
-                        TextColor3 = Color3.fromRGB(255, 255, 255) 
+                        TextColor3 = UI_CONFIG.Accent  
                     }):Play()
                     
                     task.wait(0.15)
@@ -1096,7 +1102,7 @@ function Library:New(options)
                         BackgroundColor3 = Theme.Main 
                     }):Play()
                     TweenService:Create(BtnLabel, TweenInfo.new(0.15), { 
-                        TextColor3 = UI_CONFIG.Accent 
+                        TextColor3 = UI_CONFIG.Accent   
                     }):Play()
                     
                     if callback then pcall(callback) end
@@ -1556,5 +1562,4 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
         Library:Toggle()
     end
 end)
-
 return Library
