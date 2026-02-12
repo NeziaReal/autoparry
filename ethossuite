@@ -1382,7 +1382,56 @@ function Library:New(options)
                     PaddingBottom = UDim.new(0, 8) 
                 })
             end
+			function Elements:AddParagraph(options)
+                local title = options.Title or ""
+                local content = options.Content or ""
+                
+                local PBox = Create("Frame", {
+                    Parent = Box,
+                    BackgroundColor3 = Library.Theme.Main,
+                    Size = UDim2.new(1, 0, 0, 0),
+                    AutomaticSize = Enum.AutomaticSize.Y,
+                }, {
+                    Create("UICorner", { CornerRadius = UDim.new(0, 8) }),
+                    Create("UIPadding", {
+                        PaddingLeft = UDim.new(0, 18),
+                        PaddingRight = UDim.new(0, 18),
+                        PaddingBottom = UDim.new(0, 16),
+                        PaddingTop = UDim.new(0, 16)
+                    })
+                })
+                ApplyStroke(PBox, Library.Theme.Stroke, 1)
 
+                if title ~= "" then
+                    Create("TextLabel", {
+                        Parent = PBox,
+                        Text = title,
+                        Font = UI_CONFIG.FontMain,
+                        TextColor3 = Library.Theme.Text,
+                        TextSize = 13,
+                        BackgroundTransparency = 1,
+                        Size = UDim2.new(1, 0, 0, 16),
+                        TextXAlignment = Enum.TextXAlignment.Left,
+                        FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+                    })
+                end
+
+                Create("TextLabel", {
+                    Parent = PBox,
+                    Text = content,
+                    Font = UI_CONFIG.FontBody,
+                    TextColor3 = Library.Theme.TextDim,
+                    TextSize = 11,
+                    BackgroundTransparency = 1,
+                    Position = UDim2.new(0, 0, title ~= "" and 22 or 0, 0),
+                    Size = UDim2.new(1, 0, 0, 0),
+                    AutomaticSize = Enum.AutomaticSize.Y,
+                    TextXAlignment = Enum.TextXAlignment.Left,
+                    TextWrapped = true,
+                    TextYAlignment = Enum.TextYAlignment.Top,
+                    FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+                })
+			end
             return Elements
         end
         
