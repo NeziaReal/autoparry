@@ -1096,7 +1096,7 @@ function Library:New(options)
                         BackgroundColor3 = Theme.Main 
                     }):Play()
                     TweenService:Create(BtnLabel, TweenInfo.new(0.15), { 
-                        TextColor3 = UI_CONFIG.Accent 
+                        TextColor3 = Color3.fromRGB(255, 255, 255),
                     }):Play()
                     
                     if callback then pcall(callback) end
