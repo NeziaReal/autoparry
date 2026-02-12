@@ -18,6 +18,7 @@ local Players = game:GetService("Players")
 local Library = {}
 Library.Flags = {}
 Library.FlagCallbacks = {}
+Library.Options = {}  -- Store all UI element objects for SaveManager
 
 --// MOBILE DETECTION
 local IsMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
@@ -815,7 +816,7 @@ function Library:New(options)
                 
                 Create("UIPadding", { Parent = ToggleBtn, PaddingBottom = UDim.new(0, 2) })
                 
-                return {
+                local element = {
                     Set = function(value)
                         if active ~= value then
                             Toggle()
@@ -825,6 +826,9 @@ function Library:New(options)
                         return active
                     end
                 }
+                
+                Library.Options[flag] = element  -- Store for SaveManager
+                return element
             end
 
             function Elements:CreateSlider(text, desc, min, max, default, callback, flag)
@@ -956,7 +960,7 @@ function Library:New(options)
 
                 Create("UIPadding", { Parent = SliderFrame, PaddingBottom = UDim.new(0, 6) })
                 
-                return {
+                local element = {
                     Set = function(value)
                         local clamped = math.clamp(value, min, max)
                         local percent = (clamped - min) / (max - min)
@@ -970,6 +974,9 @@ function Library:New(options)
                         return currentValue
                     end
                 }
+                
+                Library.Options[flag] = element  -- Store for SaveManager
+                return element
             end
 
             function Elements:CreateLabel(text)
@@ -1210,6 +1217,21 @@ function Library:New(options)
                 end)
 
                 Create("UIPadding", { Parent = KeybindFrame, PaddingBottom = UDim.new(0, 8) })
+                
+                local element = {
+                    Set = function(value)
+                        currentKey = value
+                        KeyBtn.Text = value.Name or "None"
+                        Library.Flags[flag] = value
+                        KeybindFunctions[flag].Key = value
+                    end,
+                    Get = function()
+                        return currentKey
+                    end
+                }
+                
+                Library.Options[flag] = element  -- Store for SaveManager
+                return element
             end
 
             function Elements:CreateDropdown(text, desc, options, default, callback, flag)
@@ -1364,6 +1386,22 @@ function Library:New(options)
                 end)
 
                 Create("UIPadding", { Parent = DropdownFrame, PaddingBottom = UDim.new(0, 8) })
+                
+                local element = {
+                    Set = function(value)
+                        DropLabel.Text = value
+                        Library.Flags[flag] = value
+                        if callback then
+                            pcall(callback, value)
+                        end
+                    end,
+                    Get = function()
+                        return Library.Flags[flag]
+                    end
+                }
+                
+                Library.Options[flag] = element  -- Store for SaveManager
+                return element
             end
 
             function Elements:CreateInput(text, desc, placeholder, callback, flag)
@@ -1445,6 +1483,22 @@ function Library:New(options)
                     Parent = InputFrame, 
                     PaddingBottom = UDim.new(0, 8) 
                 })
+                
+                local element = {
+                    Set = function(value)
+                        InputBox.Text = value
+                        Library.Flags[flag] = value
+                        if callback then
+                            pcall(callback, value)
+                        end
+                    end,
+                    Get = function()
+                        return InputBox.Text
+                    end
+                }
+                
+                Library.Options[flag] = element  -- Store for SaveManager
+                return element
             end
 
             return Elements
