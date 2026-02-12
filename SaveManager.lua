@@ -230,16 +230,38 @@ function SaveManager:BuildConfigSection(tab)
     local Section = tab:CreateSection("Configuration")
     
     local configName = ""
+    local configDropdown = nil
     
-    -- CreateInput(text, desc, placeholder, callback, flag)
-    Section:CreateInput("Config Name", "Enter the name for your config", "Enter config name...", function(value)
+    -- Function to refresh dropdown options
+    local function RefreshDropdown()
+        local configs = self:ListConfigs()
+        if #configs == 0 then
+            configs = {"No configs found"}
+        end
+        return configs
+    end
+    
+    -- CreateDropdown(text, desc, options, default, callback, flag)
+    configDropdown = Section:CreateDropdown("Select Config", "Choose a config to load/delete", RefreshDropdown(), nil, function(value)
+        if value ~= "No configs found" then
+            configName = value
+        end
+    end, "SaveManager_ConfigDropdown")
+    
+    -- CreateInput for creating new configs
+    Section:CreateInput("New Config Name", "Enter name for new config", "Enter config name...", function(value)
         configName = value
-    end, "SaveManager_ConfigName")
+    end, "SaveManager_NewConfigName")
     
     -- CreateButton(text, desc, callback)
     Section:CreateButton("Save Config", "Save current settings", function()
         if configName ~= "" then
             self:Save(configName)
+            -- Refresh dropdown after saving
+            task.wait(0.1)
+            if self.Library and self.Library.Notify then
+                self.Library:Notify("Info", "Please reopen menu to see updated config list", 2)
+            end
         else
             if self.Library and self.Library.Notify then
                 self.Library:Notify("Error", "Please enter a config name!", 3)
@@ -248,47 +270,50 @@ function SaveManager:BuildConfigSection(tab)
     end)
     
     Section:CreateButton("Load Config", "Load saved settings", function()
-        if configName ~= "" then
+        if configName ~= "" and configName ~= "No configs found" then
             self:Load(configName)
         else
             if self.Library and self.Library.Notify then
-                self.Library:Notify("Error", "Please enter a config name!", 3)
+                self.Library:Notify("Error", "Please select or enter a config name!", 3)
             end
         end
     end)
     
     Section:CreateButton("Delete Config", "Remove saved configuration", function()
-        if configName ~= "" then
+        if configName ~= "" and configName ~= "No configs found" then
             self:DeleteConfig(configName)
+            -- Refresh dropdown after deleting
+            task.wait(0.1)
+            if self.Library and self.Library.Notify then
+                self.Library:Notify("Info", "Please reopen menu to see updated config list", 2)
+            end
         else
             if self.Library and self.Library.Notify then
-                self.Library:Notify("Error", "Please enter a config name!", 3)
+                self.Library:Notify("Error", "Please select or enter a config name!", 3)
             end
         end
     end)
     
-    Section:CreateButton("List Configs", "Show all saved configurations", function()
-        local configs = self:ListConfigs()
-        if #configs > 0 then
-            if self.Library and self.Library.Notify then
+    Section:CreateButton("Refresh Config List", "Reload available configurations", function()
+        if self.Library and self.Library.Notify then
+            local configs = self:ListConfigs()
+            if #configs > 0 then
                 self.Library:Notify("Saved Configs", table.concat(configs, ", "), 5)
-            end
-        else
-            if self.Library and self.Library.Notify then
+            else
                 self.Library:Notify("No Configs", "No saved configurations found!", 3)
             end
         end
     end)
     
     Section:CreateButton("Set as Autoload", "Auto-load this config on startup", function()
-        if configName ~= "" then
+        if configName ~= "" and configName ~= "No configs found" then
             self:SetAutoloadConfig(configName)
             if self.Library and self.Library.Notify then
                 self.Library:Notify("Autoload Set", "'" .. configName .. "' will auto-load on startup!", 3)
             end
         else
             if self.Library and self.Library.Notify then
-                self.Library:Notify("Error", "Please enter a config name!", 3)
+                self.Library:Notify("Error", "Please select or enter a config name!", 3)
             end
         end
     end)
