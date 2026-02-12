@@ -1054,7 +1054,7 @@ function Library:New(options)
                     Parent = Btn,
                     Text = "Click",
                     Font = Enum.Font.GothamBold,
-                    TextColor3 = Color3.fromRGB(255, 255, 255),
+                    TextColor3 = UI_CONFIG.Accent
                     TextSize = 11,
                     BackgroundTransparency = 1,
                     Size = UDim2.new(1, 0, 1, 0),
@@ -1077,7 +1077,7 @@ function Library:New(options)
                         BackgroundColor3 = Theme.Main 
                     }):Play()
                     TweenService:Create(BtnLabel, TweenInfo.new(0.15), { 
-                        TextColor3 = UI_CONFIG.Accent 
+                        TextColor3 = Color3.fromRGB(255, 255, 255), 
                     }):Play()
                 end)
 
