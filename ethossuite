@@ -1395,5 +1395,5 @@ function Library:New(options)
     
     return Window
 end
-
 return Library
+print("All Flags:", Library.Flags)
