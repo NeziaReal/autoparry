@@ -242,10 +242,7 @@ function SaveManager:IgnoreThemeSettings()
 end
 
 function SaveManager:BuildConfigSection(tab)
-    tab:AddParagraph({
-        Title = "Configuration",
-        Content = "Manage your saved configurations"
-    })
+    tab:CreateLabel("Configuration: Manage your saved configurations")
     
     local configName = ""
     
@@ -362,5 +359,6 @@ function SaveManager:BuildConfigSection(tab)
         end
     })
 end
+
 
 return SaveManager
