@@ -4,47 +4,9 @@ local SaveManager = {}
 SaveManager.Folder = "KitsuConfigs"
 SaveManager.Ignore = {}
 SaveManager.Library = nil
-SaveManager.Parser = {
-    Toggle = {
-        Save = function(idx, object) return { type = "Toggle", idx = idx, value = object.Value } end,
-        Load = function(idx, data) 
-            if SaveManager.Library and SaveManager.Library.Options and SaveManager.Library.Options[idx] then
-                pcall(function() SaveManager.Library.Options[idx]:SetValue(data.value) end)
-            end
-        end
-    },
-    Slider = {
-        Save = function(idx, object) return { type = "Slider", idx = idx, value = object.Value } end,
-        Load = function(idx, data) 
-            if SaveManager.Library and SaveManager.Library.Options and SaveManager.Library.Options[idx] then
-                pcall(function() SaveManager.Library.Options[idx]:SetValue(data.value) end)
-            end
-        end
-    },
-    Dropdown = {
-        Save = function(idx, object) 
-            return { 
-                type = "Dropdown", 
-                idx = idx, 
-                value = object.Value, 
-                multi = type(object.Value) == "table" 
-            }
-        end,
-        Load = function(idx, data) 
-            if SaveManager.Library and SaveManager.Library.Options and SaveManager.Library.Options[idx] then
-                pcall(function() SaveManager.Library.Options[idx]:SetValue(data.value) end)
-            end
-        end
-    },
-    Input = {
-        Save = function(idx, object) return { type = "Input", idx = idx, value = object.Value } end,
-        Load = function(idx, data) 
-            if SaveManager.Library and SaveManager.Library.Options and SaveManager.Library.Options[idx] then
-                pcall(function() SaveManager.Library.Options[idx]:SetValue(data.value) end)
-            end
-        end
-    }
-}
+
+-- Kitsu stores values in Library.Flags[flag] = value
+-- Kitsu stores callbacks in Library.FlagCallbacks[flag] = function
 
 function SaveManager:SetIgnoreIndexes(list)
     for _, key in next, list do
@@ -62,22 +24,21 @@ function SaveManager:SetLibrary(library)
 end
 
 function SaveManager:BuildFolderTree()
-    pcall(function()
-        local paths = {}
-        for i = 1, #self.Folder do
-            local str = string.sub(self.Folder, 1, i)
-            if string.sub(self.Folder, i, i) == "/" then
-                table.insert(paths, str)
-            end
+    local paths = {}
+    local parts = self.Folder:split("/")
+    local currentPath = ""
+    
+    for i, part in ipairs(parts) do
+        currentPath = currentPath .. part
+        table.insert(paths, currentPath)
+        currentPath = currentPath .. "/"
+    end
+    
+    for _, path in ipairs(paths) do
+        if not isfolder(path) then
+            makefolder(path)
         end
-        table.insert(paths, self.Folder)
-        
-        for _, path in next, paths do
-            if not isfolder(path) then
-                makefolder(path)
-            end
-        end
-    end)
+    end
 end
 
 function SaveManager:Save(name)
@@ -86,28 +47,13 @@ function SaveManager:Save(name)
     
     local fullPath = self.Folder .. "/" .. name .. ".json"
     local data = {
-        version = "1.0",
-        timestamp = os.time(),
         objects = {}
     }
     
-    for idx, option in next, self.Library.Options do
-        if not self.Ignore[idx] then
-            local saveData = nil
-            
-            if type(option.Value) == "boolean" then
-                saveData = self.Parser.Toggle.Save(idx, option)
-            elseif type(option.Value) == "number" then
-                saveData = self.Parser.Slider.Save(idx, option)
-            elseif type(option.Value) == "string" then
-                saveData = self.Parser.Input.Save(idx, option)
-            elseif type(option.Value) == "table" then
-                saveData = self.Parser.Dropdown.Save(idx, option)
-            end
-            
-            if saveData then
-                table.insert(data.objects, saveData)
-            end
+    -- Iterate through Kitsu Flags
+    for flag, value in pairs(self.Library.Flags) do
+        if not self.Ignore[flag] then
+            data.objects[flag] = value
         end
     end
     
@@ -116,20 +62,11 @@ function SaveManager:Save(name)
     end)
     
     if success then
-        local writeSuccess = pcall(function()
-            writefile(fullPath, encoded)
-        end)
-        
-        if writeSuccess then
-            if self.Library.Notify then
-                self.Library:Notify({
-                    Title = "Config Saved",
-                    Content = "Configuration '" .. name .. "' has been saved!",
-                    Duration = 3
-                })
-            end
-            return true
+        writefile(fullPath, encoded)
+        if self.Library.Notify then
+            self.Library:Notify("Config Saved", "Configuration '" .. name .. "' has been saved!", 3)
         end
+        return true
     end
     
     return false
@@ -142,11 +79,7 @@ function SaveManager:Load(name)
     
     if not isfile(fullPath) then
         if self.Library.Notify then
-            self.Library:Notify({
-                Title = "Config Error",
-                Content = "Configuration '" .. name .. "' does not exist!",
-                Duration = 3
-            })
+            self.Library:Notify("Config Error", "Configuration '" .. name .. "' does not exist!", 3)
         end
         return false
     end
@@ -155,20 +88,23 @@ function SaveManager:Load(name)
         return HttpService:JSONDecode(readfile(fullPath))
     end)
     
-    if success then
-        for _, item in next, decoded.objects do
-            local parser = self.Parser[item.type]
-            if parser then
-                pcall(function() parser.Load(item.idx, item) end)
+    if success and decoded.objects then
+        for flag, value in pairs(decoded.objects) do
+            -- Update the flag value
+            self.Library.Flags[flag] = value
+            
+            -- Trigger the callback to update the game state
+            -- Note: Visual UI elements (sliders/toggles) won't visually update 
+            -- unless the specific element object was saved, but the logic will work.
+            if self.Library.FlagCallbacks[flag] then
+                pcall(function() 
+                    self.Library.FlagCallbacks[flag](value) 
+                end)
             end
         end
         
         if self.Library.Notify then
-            self.Library:Notify({
-                Title = "Config Loaded",
-                Content = "Configuration '" .. name .. "' has been loaded!",
-                Duration = 3
-            })
+            self.Library:Notify("Config Loaded", "Configuration '" .. name .. "' has been loaded!", 3)
         end
         return true
     end
@@ -180,13 +116,9 @@ function SaveManager:DeleteConfig(name)
     local fullPath = self.Folder .. "/" .. name .. ".json"
     
     if isfile(fullPath) then
-        pcall(function() delfile(fullPath) end)
+        delfile(fullPath)
         if self.Library.Notify then
-            self.Library:Notify({
-                Title = "Config Deleted",
-                Content = "Configuration '" .. name .. "' has been deleted!",
-                Duration = 3
-            })
+            self.Library:Notify("Config Deleted", "Configuration '" .. name .. "' has been deleted!", 3)
         end
         return true
     end
@@ -215,15 +147,13 @@ function SaveManager:ListConfigs()
 end
 
 function SaveManager:SetAutoloadConfig(name)
-    pcall(function()
-        writefile(self.Folder .. "/__autoload.txt", name)
-    end)
+    writefile(self.Folder .. "/__autoload.txt", name)
 end
 
 function SaveManager:GetAutoloadConfig()
     local path = self.Folder .. "/__autoload.txt"
     if isfile(path) then
-        return pcall(function() return readfile(path) end) or nil
+        return readfile(path)
     end
     return nil
 end
@@ -231,7 +161,7 @@ end
 function SaveManager:LoadAutoloadConfig()
     local name = self:GetAutoloadConfig()
     if name then
-        task.wait(1)
+        task.wait(1.5) -- Wait for UI to load
         return self:Load(name)
     end
     return false
@@ -241,124 +171,61 @@ function SaveManager:IgnoreThemeSettings()
     self:SetIgnoreIndexes({ "InterfaceTheme", "InterfaceTransparency" })
 end
 
-function SaveManager:BuildConfigSection(tab)
+-- Matches Kitsu UI Syntax: Section:CreateInput, Section:CreateButton
+function SaveManager:BuildConfigSection(section)
     
     local configName = ""
     
-    tab:CreateInput("SaveManager_ConfigName", {
-        Title = "Config Name",
-        Default = "",
-        Placeholder = "Enter config name...",
-        Callback = function(value)
-            configName = value
-        end
-    })
+    section:CreateInput("Config Name", "Create or select a name", "Enter config name...", function(value)
+        configName = value
+    end)
     
-    tab:AddButton({
-        Title = "Save Config",
-        Description = "Save current settings",
-        Callback = function()
-            if configName ~= "" then
-                self:Save(configName)
-            else
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Error",
-                        Content = "Please enter a config name!",
-                        Duration = 3
-                    })
-                end
-            end
+    section:CreateButton("Save Config", "Save current settings", function()
+        if configName ~= "" then
+            self:Save(configName)
+        else
+            self.Library:Notify("Error", "Please enter a config name!", 2)
         end
-    })
+    end)
     
-    tab:AddButton({
-        Title = "Load Config",
-        Description = "Load saved settings",
-        Callback = function()
-            if configName ~= "" then
-                self:Load(configName)
-            else
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Error",
-                        Content = "Please enter a config name!",
-                        Duration = 3
-                    })
-                end
-            end
+    section:CreateButton("Load Config", "Load saved settings", function()
+        if configName ~= "" then
+            self:Load(configName)
+        else
+            self.Library:Notify("Error", "Please enter a config name!", 2)
         end
-    })
+    end)
     
-    tab:AddButton({
-        Title = "Delete Config",
-        Description = "Remove saved configuration",
-        Callback = function()
-            if configName ~= "" then
-                self:DeleteConfig(configName)
-            else
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Error",
-                        Content = "Please enter a config name!",
-                        Duration = 3
-                    })
-                end
-            end
+    section:CreateButton("Delete Config", "Remove saved configuration", function()
+        if configName ~= "" then
+            self:DeleteConfig(configName)
+        else
+            self.Library:Notify("Error", "Please enter a config name!", 2)
         end
-    })
+    end)
     
-    tab:AddButton({
-        Title = "List Configs",
-        Description = "Show all saved configurations",
-        Callback = function()
-            local configs = self:ListConfigs()
-            if #configs > 0 then
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Saved Configs",
-                        Content = table.concat(configs, ", "),
-                        Duration = 5
-                    })
-                end
-            else
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "No Configs",
-                        Content = "No saved configurations found!",
-                        Duration = 3
-                    })
-                end
+    section:CreateButton("Refresh / List Configs", "Check console (F9) for list", function()
+        local configs = self:ListConfigs()
+        if #configs > 0 then
+            -- Kitsu Notify is small, so we print list to console and notify user
+            print("--- SAVED CONFIGS ---")
+            for _, cfg in pairs(configs) do
+                print(cfg)
             end
+            self.Library:Notify("Saved Configs", "List printed to console (F9)", 3)
+        else
+            self.Library:Notify("No Configs", "No saved configurations found!", 2)
         end
-    })
+    end)
     
-    tab:AddButton({
-        Title = "Set as Autoload",
-        Description = "Auto-load this config on startup",
-        Callback = function()
-            if configName ~= "" then
-                self:SetAutoloadConfig(configName)
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Autoload Set",
-                        Content = "'" .. configName .. "' will auto-load on startup!",
-                        Duration = 3
-                    })
-                end
-            else
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Error",
-                        Content = "Please enter a config name!",
-                        Duration = 3
-                    })
-                end
-            end
+    section:CreateButton("Set as Autoload", "Auto-load this config on startup", function()
+        if configName ~= "" then
+            self:SetAutoloadConfig(configName)
+            self.Library:Notify("Autoload Set", "'" .. configName .. "' will load on start!", 3)
+        else
+            self.Library:Notify("Error", "Please enter a config name!", 2)
         end
-    })
+    end)
 end
 
 return SaveManager
-
-
