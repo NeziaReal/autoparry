@@ -122,11 +122,7 @@ function SaveManager:Save(name)
         
         if writeSuccess then
             if self.Library.Notify then
-                self.Library:Notify({
-                    Title = "Config Saved",
-                    Content = "Configuration '" .. name .. "' has been saved!",
-                    Duration = 3
-                })
+                self.Library:Notify("Config Saved", "Configuration '" .. name .. "' has been saved!", 3)
             end
             return true
         end
@@ -142,11 +138,7 @@ function SaveManager:Load(name)
     
     if not isfile(fullPath) then
         if self.Library.Notify then
-            self.Library:Notify({
-                Title = "Config Error",
-                Content = "Configuration '" .. name .. "' does not exist!",
-                Duration = 3
-            })
+            self.Library:Notify("Config Error", "Configuration '" .. name .. "' does not exist!", 3)
         end
         return false
     end
@@ -164,11 +156,7 @@ function SaveManager:Load(name)
         end
         
         if self.Library.Notify then
-            self.Library:Notify({
-                Title = "Config Loaded",
-                Content = "Configuration '" .. name .. "' has been loaded!",
-                Duration = 3
-            })
+            self.Library:Notify("Config Loaded", "Configuration '" .. name .. "' has been loaded!", 3)
         end
         return true
     end
@@ -182,11 +170,7 @@ function SaveManager:DeleteConfig(name)
     if isfile(fullPath) then
         pcall(function() delfile(fullPath) end)
         if self.Library.Notify then
-            self.Library:Notify({
-                Title = "Config Deleted",
-                Content = "Configuration '" .. name .. "' has been deleted!",
-                Duration = 3
-            })
+            self.Library:Notify("Config Deleted", "Configuration '" .. name .. "' has been deleted!", 3)
         end
         return true
     end
@@ -242,117 +226,72 @@ function SaveManager:IgnoreThemeSettings()
 end
 
 function SaveManager:BuildConfigSection(tab)
-    local Label = tab:CreateLabel("Configuration: Manage Saved Configs")
+    -- Create a section first
+    local Section = tab:CreateSection("Configuration")
     
     local configName = ""
     
-    local Input = tab:CreateInput({
-        Name = "SaveManager_ConfigName",
-        PlaceholderText = "Enter config name...",
-        RemoveTextAfterFocusLost = false,
-        Callback = function(value)
-            configName = value
-        end
-    })
+    -- CreateInput(text, desc, placeholder, callback, flag)
+    Section:CreateInput("Config Name", "Enter the name for your config", "Enter config name...", function(value)
+        configName = value
+    end, "SaveManager_ConfigName")
     
-    local SaveButton = tab:CreateButton({
-        Name = "Save Config",
-        Callback = function()
-            if configName ~= "" then
-                self:Save(configName)
-            else
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Error",
-                        Content = "Please enter a config name!",
-                        Duration = 3
-                    })
-                end
+    -- CreateButton(text, desc, callback)
+    Section:CreateButton("Save Config", "Save current settings", function()
+        if configName ~= "" then
+            self:Save(configName)
+        else
+            if self.Library and self.Library.Notify then
+                self.Library:Notify("Error", "Please enter a config name!", 3)
             end
         end
-    })
+    end)
     
-    local LoadButton = tab:CreateButton({
-        Name = "Load Config",
-        Callback = function()
-            if configName ~= "" then
-                self:Load(configName)
-            else
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Error",
-                        Content = "Please enter a config name!",
-                        Duration = 3
-                    })
-                end
+    Section:CreateButton("Load Config", "Load saved settings", function()
+        if configName ~= "" then
+            self:Load(configName)
+        else
+            if self.Library and self.Library.Notify then
+                self.Library:Notify("Error", "Please enter a config name!", 3)
             end
         end
-    })
+    end)
     
-    local DeleteButton = tab:CreateButton({
-        Name = "Delete Config",
-        Callback = function()
-            if configName ~= "" then
-                self:DeleteConfig(configName)
-            else
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Error",
-                        Content = "Please enter a config name!",
-                        Duration = 3
-                    })
-                end
+    Section:CreateButton("Delete Config", "Remove saved configuration", function()
+        if configName ~= "" then
+            self:DeleteConfig(configName)
+        else
+            if self.Library and self.Library.Notify then
+                self.Library:Notify("Error", "Please enter a config name!", 3)
             end
         end
-    })
+    end)
     
-    local ListButton = tab:CreateButton({
-        Name = "List Configs",
-        Callback = function()
-            local configs = self:ListConfigs()
-            if #configs > 0 then
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Saved Configs",
-                        Content = table.concat(configs, ", "),
-                        Duration = 5
-                    })
-                end
-            else
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "No Configs",
-                        Content = "No saved configurations found!",
-                        Duration = 3
-                    })
-                end
+    Section:CreateButton("List Configs", "Show all saved configurations", function()
+        local configs = self:ListConfigs()
+        if #configs > 0 then
+            if self.Library and self.Library.Notify then
+                self.Library:Notify("Saved Configs", table.concat(configs, ", "), 5)
+            end
+        else
+            if self.Library and self.Library.Notify then
+                self.Library:Notify("No Configs", "No saved configurations found!", 3)
             end
         end
-    })
+    end)
     
-    local AutoloadButton = tab:CreateButton({
-        Name = "Set as Autoload",
-        Callback = function()
-            if configName ~= "" then
-                self:SetAutoloadConfig(configName)
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Autoload Set",
-                        Content = "'" .. configName .. "' will auto-load on startup!",
-                        Duration = 3
-                    })
-                end
-            else
-                if self.Library and self.Library.Notify then
-                    self.Library:Notify({
-                        Title = "Error",
-                        Content = "Please enter a config name!",
-                        Duration = 3
-                    })
-                end
+    Section:CreateButton("Set as Autoload", "Auto-load this config on startup", function()
+        if configName ~= "" then
+            self:SetAutoloadConfig(configName)
+            if self.Library and self.Library.Notify then
+                self.Library:Notify("Autoload Set", "'" .. configName .. "' will auto-load on startup!", 3)
+            end
+        else
+            if self.Library and self.Library.Notify then
+                self.Library:Notify("Error", "Please enter a config name!", 3)
             end
         end
-    })
+    end)
 end
 
 return SaveManager
