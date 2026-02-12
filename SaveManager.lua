@@ -7,7 +7,7 @@
 local HttpService = game:GetService("HttpService")
 
 local SaveManager = {}
-SaveManager.Folder = "NLSConfigs"
+SaveManager.Folder = "KitsuConfigs"
 SaveManager.Ignore = {}
 SaveManager.Library = nil
 SaveManager.Options = {} -- Store element objects here
