@@ -2,20 +2,20 @@ if getgenv().Library then
 	getgenv().Library:Unload()
 end
 
-if not isfolder("solixhub") then
-	makefolder("solixhub")
+if not isfolder("NamelessHub") then
+	makefolder("NamelessHub")
 end
 
-if not isfolder("solixhub/Assets") then
-	makefolder("solixhub/Assets")
+if not isfolder("NamelessHub/Assets") then
+	makefolder("NamelessHub/Assets")
 end
 
-if not isfolder("solixhub/Configs") then
-	makefolder("solixhub/Configs")
+if not isfolder("NamelessHub/Configs") then
+	makefolder("NamelessHub/Configs")
 end
 
-if not isfolder("solixhub/Themes") then
-	makefolder("solixhub/Themes")
+if not isfolder("NamelessHub/Themes") then
+	makefolder("NamelessHub/Themes")
 end
 
 local Library do
@@ -101,10 +101,10 @@ local Library do
 		},
 
 		Folders = {
-			Directory = "solixhub",
-			Configs = "solixhub/Configs",
-			Assets = "solixhub/Assets",
-			Themes = "solixhub/Themes"
+			Directory = "NamelessHub",
+			Configs = "NamelessHub/Configs",
+			Assets = "NamelessHub/Assets",
+			Themes = "NamelessHub/Themes"
 		},
 
 		Images = {
@@ -231,7 +231,7 @@ local Library do
 			["Shadow"] = FromRGB(0, 0, 0),
 			["Text"] = FromRGB(255, 255, 255),
 			["Inactive Text"] = FromRGB(185, 185, 185),
-			["Accent"] = FromRGB(232, 186, 248),
+			["Accent"] = FromRGB(138, 0, 185),
 			["Element"] = FromRGB(36, 32, 39),
 			["Gradient"] = FromRGB(216, 216, 216)
 		},
@@ -4695,7 +4695,7 @@ local Library do
 		Properties = Properties or { }
 
 		local Window = {
-			Name = Properties.Name or Properties.name or "solixhub",
+			Name = Properties.Name or Properties.name or "NamelessHub",
 			Size = Properties.Size or Properties.size or (not IsMobile and UDim2New(0, 770, 0, 526) or UDim2New(0, 526, 0, 350)),
 			FadeSpeed = Properties.FadeSpeed or Properties.fadespeed or 0.25,
 			BackgroundIcon = Properties.BackgroundIcon or Properties.backgroundicon or "rbxassetid://",
