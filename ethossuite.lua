@@ -1,9 +1,3 @@
---[[
-    COMPLETE WORKING EXAMPLE
-    This actually works - tested and verified
-]]
-
--- Load UI Library (use your actual URL)
 --[[ 
     KITSU UI LIBRARY - ULTRA COMPACT VERSION
     Matches the second reference image exactly
