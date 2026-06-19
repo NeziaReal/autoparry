@@ -21,8 +21,8 @@ A modern, feature-rich UI library for Roblox executors with a sleek dark theme a
 
 ### Method 1: Direct Load
 ```lua
-local Library = loadstring(game:HttpGet("YOUR_LIBRARY_URL_HERE"))()
-local SaveManager = loadstring(game:HttpGet("YOUR_SAVEMANAGER_URL_HERE"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/NeziaReal/autoparry/refs/heads/main/ethossuite.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/NeziaReal/autoparry/refs/heads/main/SaveManager.lua"))()
 ```
 
 ### Method 2: Local Files
@@ -182,7 +182,7 @@ The Save Manager allows users to save and load their configurations.
 
 ```lua
 -- Load SaveManager
-local SaveManager = loadstring(game:HttpGet("YOUR_SAVEMANAGER_URL"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/NeziaReal/autoparry/refs/heads/main/SaveManager.lua"))()
 
 -- Initialize with library
 SaveManager:SetLibrary(Library)
@@ -321,7 +321,7 @@ local UI_CONFIG = {
 ```lua
 -- Load library
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/NeziaReal/autoparry/refs/heads/main/ethossuite.lua"))()
-local SaveManager = loadstring(game:HttpGet("SAVEMANAGER_URL"))()
+local SaveManager = loadstring(game:HttpGet("[SAVEMANAGER_URL](https://raw.githubusercontent.com/NeziaReal/autoparry/refs/heads/main/SaveManager.lua)"))()
 
 -- Create window
 local Window = Library:New({
@@ -387,9 +387,9 @@ Library:Notify("Script Loaded", "Welcome to My Script v1.0!", 5)
 
 This library has been tested and works with:
 - ✅ Synapse X / Synapse Z
-- ✅ Script-Ware
-- ✅ Krnl
-- ✅ Fluxus
+- ✅ Wave
+- ✅ Argon(My Exploit)
+- ✅ Potassium
 - ✅ Arceus X (Mobile)
 - ✅ Delta (iOS)
 
