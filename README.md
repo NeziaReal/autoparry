@@ -32,7 +32,7 @@ Download both files and load them from your executor's workspace.
 
 ```lua
 -- Initialize the library
-local Library = loadstring(game:HttpGet("YOUR_URL"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/NeziaReal/autoparry/refs/heads/main/ethossuite.lua"))()
 
 -- Create main window
 local Window = Library:New({
@@ -320,7 +320,7 @@ local UI_CONFIG = {
 
 ```lua
 -- Load library
-local Library = loadstring(game:HttpGet("YOUR_URL"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/NeziaReal/autoparry/refs/heads/main/ethossuite.lua"))()
 local SaveManager = loadstring(game:HttpGet("SAVEMANAGER_URL"))()
 
 -- Create window
